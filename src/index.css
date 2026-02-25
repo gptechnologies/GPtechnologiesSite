@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Orbitron:wght@400;500;700;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Space Mono", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "VT323", ui-monospace, SFMono-Regular, monospace;
+  --font-display: "Orbitron", sans-serif;
+  
+  --color-y2k-pink: #ff00ff;
+  --color-y2k-cyan: #00ffff;
+  --color-y2k-purple: #8a2be2;
+  --color-y2k-green: #39ff14;
+  --color-y2k-silver: #c0c0c0;
+  --color-y2k-bg: #000033;
+}
+
+body {
+  background-color: var(--color-y2k-bg);
+  background-image: 
+    linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  color: white;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* 3D Card Mechanics */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.card-flipper {
+  transform-style: preserve-3d;
+}
+
+.card-flipper.flipped {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+/* Y2K specific styles */
+.y2k-border {
+  border: 2px solid var(--color-y2k-cyan);
+  box-shadow: 4px 4px 0px var(--color-y2k-pink);
+}
+
+.y2k-border-alt {
+  border: 2px solid var(--color-y2k-pink);
+  box-shadow: 4px 4px 0px var(--color-y2k-cyan);
+}
+
+.y2k-text-glow {
+  text-shadow: 0 0 5px var(--color-y2k-cyan), 0 0 10px var(--color-y2k-cyan);
+}
+
+.y2k-text-glow-pink {
+  text-shadow: 0 0 5px var(--color-y2k-pink), 0 0 10px var(--color-y2k-pink);
+}
+
+.y2k-gradient-text {
+  background: linear-gradient(to right, var(--color-y2k-cyan), var(--color-y2k-pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.y2k-window {
+  background: silver;
+  border-top: 2px solid white;
+  border-left: 2px solid white;
+  border-right: 2px solid #888;
+  border-bottom: 2px solid #888;
+  color: black;
+}
+
+.y2k-window-header {
+  background: linear-gradient(to right, #000080, #1084d0);
+  color: white;
+  padding: 2px 4px;
+  font-family: 'VT323', monospace;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.y2k-button {
+  background: silver;
+  border-top: 2px solid white;
+  border-left: 2px solid white;
+  border-right: 2px solid #888;
+  border-bottom: 2px solid #888;
+  padding: 2px 8px;
+  font-family: 'VT323', monospace;
+  cursor: pointer;
+}
+.y2k-button:active {
+  border-top: 2px solid #888;
+  border-left: 2px solid #888;
+  border-right: 2px solid white;
+  border-bottom: 2px solid white;
+}
+
+/* Blinking cursor for typewriter */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-blink {
+  animation: blink 0.8s step-end infinite;
+}
+
+/* Skills marquee */
+.marquee-outer {
+  overflow: hidden;
+  width: 100%;
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+.marquee-track {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: marquee 20s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  0%   { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
