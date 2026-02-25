@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Terminal, Zap, Minus, Square, X } from 'lucide-react';
+import { Terminal, ChevronUp, Minus, Square, X } from 'lucide-react';
 import { projects } from './data/projects';
 
 const skills = [
@@ -135,9 +135,9 @@ const BusinessCard = () => {
       </div>
 
       <div className="mt-8 flex items-center gap-2 text-y2k-cyan font-mono text-sm animate-pulse bg-black/50 px-4 py-1 border border-y2k-cyan/30">
-        <Zap size={14} />
-        <p>Click the card to flip cause my friend Eric got confused :) thank you AI</p>
-        <Zap size={14} />
+        <ChevronUp size={14} />
+        <p>Click card to flip</p>
+        <ChevronUp size={14} />
       </div>
     </div>
   );
