@@ -134,7 +134,10 @@ const BusinessCard = () => {
         </div>
       </div>
 
-      <div className="mt-8 flex items-center gap-2 text-y2k-cyan font-mono text-sm animate-pulse bg-black/50 px-4 py-1 border border-y2k-cyan/30">
+      <div
+        className="mt-8 flex items-center gap-2 text-y2k-cyan font-mono text-sm animate-pulse bg-black/50 px-4 py-1 border border-y2k-cyan/30 cursor-pointer"
+        onClick={() => setIsFlipped(!isFlipped)}
+      >
         <ChevronUp size={14} />
         <p>Click card to flip</p>
         <ChevronUp size={14} />
