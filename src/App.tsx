@@ -136,7 +136,7 @@ const BusinessCard = () => {
 
       <div className="mt-8 flex items-center gap-2 text-y2k-cyan font-mono text-sm animate-pulse bg-black/50 px-4 py-1 border border-y2k-cyan/30">
         <Zap size={14} />
-        <p>CLICK_TO_FLIP</p>
+        <p>Click the card to flip cause my friend Eric got confused :) thank you AI</p>
         <Zap size={14} />
       </div>
     </div>
