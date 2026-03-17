@@ -346,6 +346,23 @@ export default function App() {
         <Divider label="SCROLL_DOWN" />
         <MyWork />
       </main>
+
+      <footer className="relative z-10 w-full max-w-4xl mx-auto px-4 py-8 border-t border-y2k-cyan/20">
+        <div className="flex flex-col items-center gap-4">
+          <div className="flex gap-6">
+            <a href="https://linkedin.com/in/jai-mangat" target="_blank" rel="noopener noreferrer" className="text-y2k-cyan hover:text-y2k-pink font-mono text-xs transition-colors">
+              LINKEDIN
+            </a>
+            <a href="https://github.com/gptechnologies" target="_blank" rel="noopener noreferrer" className="text-y2k-cyan hover:text-y2k-pink font-mono text-xs transition-colors">
+              GITHUB
+            </a>
+            <a href="mailto:jaimangat11@gmail.com" className="text-y2k-cyan hover:text-y2k-pink font-mono text-xs transition-colors">
+              EMAIL
+            </a>
+          </div>
+          <p className="text-gray-600 font-mono text-xs">&copy; {new Date().getFullYear()} GPTechnologies</p>
+        </div>
+      </footer>
     </div>
   );
 }
