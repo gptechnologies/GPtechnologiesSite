@@ -1,0 +1,170 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ── Auth ─────────────────────────────────────────────────
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts Account[]
+  sessions Session[]
+  wallet   CreditWallet?
+  projects Project[]
+  ledger   CreditLedger[]
+  billing  BillingCustomer?
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+}
+
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
+}
+
+// ── Credits ──────────────────────────────────────────────
+
+model CreditWallet {
+  id      String @id @default(cuid())
+  userId  String @unique
+  balance Int    @default(0)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model CreditLedger {
+  id             String   @id @default(cuid())
+  userId         String
+  delta          Int
+  reason         String
+  runId          String?
+  editRequestId  String?
+  idempotencyKey String?  @unique
+  createdAt      DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ── Billing ──────────────────────────────────────────────
+
+model BillingCustomer {
+  id               String @id @default(cuid())
+  userId           String @unique
+  stripeCustomerId String @unique
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model BillingEvent {
+  id          String   @id @default(cuid())
+  eventId     String   @unique
+  type        String
+  processedAt DateTime @default(now())
+}
+
+// ── Projects & Runs ──────────────────────────────────────
+
+model Project {
+  id             String   @id @default(cuid())
+  userId         String
+  name           String
+  templateId     String
+  resumeData     Json?
+  promptSummary  String?
+  latestRunId    String?
+  repoUrl        String?
+  deployUrl      String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  user User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  runs Run[]
+}
+
+model Run {
+  id              String      @id @default(cuid())
+  projectId       String
+  status          RunStatus   @default(PENDING)
+  promptSummary   String?
+  templateVersion String?
+  previewUrl      String?
+  generatedFiles  Json?
+  errorMessage    String?
+  creditCost      Int         @default(1)
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  project      Project       @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  editRequests EditRequest[]
+}
+
+enum RunStatus {
+  PENDING
+  GENERATING
+  BUILDING
+  SUCCEEDED
+  FAILED
+}
+
+model EditRequest {
+  id         String            @id @default(cuid())
+  runId      String
+  prompt     String
+  status     EditRequestStatus @default(PENDING)
+  creditCost Int               @default(1)
+  diff       Json?
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @updatedAt
+
+  run Run @relation(fields: [runId], references: [id], onDelete: Cascade)
+}
+
+enum EditRequestStatus {
+  PENDING
+  PROCESSING
+  APPLIED
+  FAILED
+}

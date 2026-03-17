@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Terminal, ChevronUp, Minus, Square, X } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { Terminal, ChevronUp, Minus, Square, X, Bot, Send, Loader2, Zap } from 'lucide-react';
 import { projects } from './data/projects';
 
 const skills = [
@@ -11,18 +11,13 @@ const skills = [
 
 const SkillsMarquee = () => {
   const content = skills.map(s => s.toUpperCase()).join("  \u00b7  ");
-
   return (
     <div className="w-full mt-2 flex items-center gap-2">
       <span className="text-y2k-pink text-xs font-mono shrink-0">SKILLS::</span>
       <div className="marquee-outer">
         <div className="marquee-track">
-          <span className="text-y2k-cyan text-xs font-mono whitespace-nowrap y2k-text-glow">
-            {content}&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-          </span>
-          <span className="text-y2k-cyan text-xs font-mono whitespace-nowrap y2k-text-glow" aria-hidden="true">
-            {content}&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-          </span>
+          <span className="text-y2k-cyan text-xs font-mono whitespace-nowrap y2k-text-glow">{content}&nbsp;&nbsp;&middot;&nbsp;&nbsp;</span>
+          <span className="text-y2k-cyan text-xs font-mono whitespace-nowrap y2k-text-glow" aria-hidden="true">{content}&nbsp;&nbsp;&middot;&nbsp;&nbsp;</span>
         </div>
       </div>
     </div>
@@ -32,20 +27,15 @@ const SkillsMarquee = () => {
 const Typewriter = ({ text, speed = 60 }: { text: string; speed?: number }) => {
   const [displayed, setDisplayed] = useState('');
   const [done, setDone] = useState(false);
-
   useEffect(() => {
     let i = 0;
     const interval = setInterval(() => {
       i++;
       setDisplayed(text.slice(0, i));
-      if (i >= text.length) {
-        clearInterval(interval);
-        setDone(true);
-      }
+      if (i >= text.length) { clearInterval(interval); setDone(true); }
     }, speed);
     return () => clearInterval(interval);
   }, [text, speed]);
-
   return (
     <span>
       {displayed}
@@ -56,7 +46,6 @@ const Typewriter = ({ text, speed = 60 }: { text: string; speed?: number }) => {
 
 const BusinessCard = () => {
   const [isFlipped, setIsFlipped] = useState(false);
-
   return (
     <div className="flex flex-col items-center justify-center w-full my-16 relative z-10">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-y2k-pink/20 blur-[100px] rounded-full pointer-events-none" />
@@ -78,10 +67,8 @@ const BusinessCard = () => {
               <div className="w-2 h-2 bg-y2k-pink rounded-full animate-pulse" />
               <div className="w-2 h-2 bg-y2k-cyan rounded-full animate-pulse" style={{ animationDelay: '0.2s' }} />
             </div>
-
             <h1 className="text-4xl font-display font-black text-white y2k-text-glow tracking-widest uppercase mb-2">Jai Mangat</h1>
-            <h2 className="text-lg font-mono text-y2k-cyan mb-5 bg-y2k-cyan/10 px-3 py-1 border border-y2k-cyan/30">Forward Deployed Operator</h2>
-
+            <h2 className="text-lg font-mono text-y2k-cyan mb-5 bg-y2k-cyan/10 px-3 py-1 border border-y2k-cyan/30">Systems Architect</h2>
             <div className="w-full space-y-2 text-sm font-mono">
               <div className="flex items-center justify-between border-b border-y2k-pink/30 pb-1">
                 <span className="text-y2k-pink">EMAIL::</span>
@@ -96,37 +83,35 @@ const BusinessCard = () => {
                 <span className="text-white">New York, NY</span>
               </div>
             </div>
-
             <SkillsMarquee />
           </div>
 
           {/* Back */}
           <div className="card-face card-back absolute w-full h-full bg-black/90 y2k-border-alt p-6 flex flex-col justify-center">
             <div className="flex items-center gap-2 mb-4 border-b border-y2k-cyan/50 pb-2">
-              <Terminal size={18} className="text-y2k-cyan" />
-              <h3 className="text-lg font-mono font-bold text-y2k-cyan uppercase tracking-widest">Work_Summary.exe</h3>
+              <Zap size={18} className="text-y2k-cyan" />
+              <h3 className="text-lg font-mono font-bold text-y2k-cyan uppercase tracking-widest">What_Do_I_Do.exe</h3>
             </div>
-
-            <ul className="text-xs font-mono space-y-3 overflow-y-auto pr-2 custom-scrollbar">
+            <ul className="text-xs font-mono space-y-3 overflow-y-auto pr-2">
               <li className="flex items-start gap-2">
                 <span className="text-y2k-pink mt-0.5">{'>'}</span>
-                <div><span className="font-bold text-white">Riverstone:</span> <span className="text-gray-400">Built & deployed 3 AI agents; automated reporting, reducing month-end timeline by 30%.</span></div>
+                <span className="text-gray-300">Install AI agents into day-to-day business workflows</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-y2k-pink mt-0.5">{'>'}</span>
-                <div><span className="font-bold text-white">gptechnologies.ai:</span> <span className="text-gray-400">Integrate AI voice agents and best practice automations for local businesses.</span></div>
+                <span className="text-gray-300">Automate repetitive back-office and finance processes</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-y2k-pink mt-0.5">{'>'}</span>
-                <div><span className="font-bold text-white">Snowscapes:</span> <span className="text-gray-400">Dynamics 365 implementation; AI scheduling reduced resource downtime by 11%.</span></div>
+                <span className="text-gray-300">Connect CRM, operations, and reporting systems end-to-end</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-y2k-pink mt-0.5">{'>'}</span>
-                <div><span className="font-bold text-white">TalentBurst:</span> <span className="text-gray-400">Led QuickBooks to NetSuite transition & account reconciliations.</span></div>
+                <span className="text-gray-300">Improve scheduling, intake, and customer communication with AI</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-y2k-pink mt-0.5">{'>'}</span>
-                <div><span className="font-bold text-white">EM4X/TeraExchange:</span> <span className="text-gray-400">OTC sales support, pricing analysis & multi-asset research.</span></div>
+                <span className="text-gray-300">Turn manual ops work into reliable, automated systems</span>
               </li>
             </ul>
           </div>
@@ -143,6 +128,145 @@ const BusinessCard = () => {
         <ChevronUp size={14} />
       </div>
     </div>
+  );
+};
+
+const starterPrompts = [
+  "What does GPTechnologies help with?",
+  "How do you install AI agents?",
+  "What kind of automations can you build?",
+];
+
+interface ChatMessage {
+  role: 'user' | 'assistant';
+  content: string;
+}
+
+const Y2KChatbot = () => {
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [input, setInput] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const bottomRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages, loading]);
+
+  async function sendMessage(text: string) {
+    if (!text.trim() || loading) return;
+    const userMsg: ChatMessage = { role: 'user', content: text.trim() };
+    const history = [...messages, userMsg];
+    setMessages(history);
+    setInput('');
+    setLoading(true);
+    setError('');
+
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: history }),
+      });
+      if (!res.ok) throw new Error('Failed to get response');
+      const data = await res.json();
+      setMessages([...history, { role: 'assistant', content: data.reply }]);
+    } catch {
+      setError('Connection failed. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <section className="w-full max-w-2xl mx-auto px-4 py-16 relative z-10">
+      <div className="y2k-window">
+        <div className="y2k-window-header">
+          <div className="flex items-center gap-2">
+            <Bot size={16} />
+            <span>GPT_Assistant.exe</span>
+          </div>
+          <div className="flex gap-1">
+            <button className="y2k-button" aria-label="Minimize"><Minus size={12} /></button>
+            <button className="y2k-button" aria-label="Maximize"><Square size={10} /></button>
+            <button className="y2k-button" aria-label="Close"><X size={12} /></button>
+          </div>
+        </div>
+
+        <div className="bg-black border-4 border-silver border-t-0 flex flex-col" style={{ height: '420px' }}>
+          <div className="flex-1 overflow-y-auto p-4 space-y-3 chat-scrollbar">
+            <div className="chat-bubble-assistant">
+              <span className="text-y2k-cyan font-mono text-xs">{'>'} SYS::</span>
+              <p className="text-sm font-mono text-gray-300 mt-1">
+                Welcome to GPTechnologies. Ask me anything about our AI agents, automations, and consulting services.
+              </p>
+            </div>
+
+            {messages.length === 0 && (
+              <div className="flex flex-wrap gap-2 mt-2">
+                {starterPrompts.map((prompt, i) => (
+                  <button
+                    key={i}
+                    onClick={() => sendMessage(prompt)}
+                    className="text-xs font-mono px-3 py-1.5 border border-y2k-cyan/40 text-y2k-cyan bg-y2k-cyan/5 hover:bg-y2k-cyan/15 transition-colors rounded"
+                  >
+                    {prompt}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {messages.map((msg, i) => (
+              <div key={i} className={msg.role === 'user' ? 'chat-bubble-user' : 'chat-bubble-assistant'}>
+                <span className={`font-mono text-xs ${msg.role === 'user' ? 'text-y2k-pink' : 'text-y2k-cyan'}`}>
+                  {msg.role === 'user' ? '> YOU::' : '> GPT::'}
+                </span>
+                <p className="text-sm font-mono text-gray-300 mt-1 whitespace-pre-wrap">{msg.content}</p>
+              </div>
+            ))}
+
+            {loading && (
+              <div className="chat-bubble-assistant">
+                <span className="text-y2k-cyan font-mono text-xs">{'>'} GPT::</span>
+                <div className="flex items-center gap-2 mt-1">
+                  <Loader2 size={14} className="animate-spin text-y2k-cyan" />
+                  <span className="text-xs font-mono text-gray-500">Processing...</span>
+                </div>
+              </div>
+            )}
+
+            {error && (
+              <div className="text-xs font-mono text-red-400 bg-red-500/10 border border-red-500/30 px-3 py-2 rounded">
+                ERR:: {error}
+              </div>
+            )}
+
+            <div ref={bottomRef} />
+          </div>
+
+          <form
+            onSubmit={(e) => { e.preventDefault(); sendMessage(input); }}
+            className="border-t-2 border-silver flex"
+          >
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              disabled={loading}
+              placeholder="Type your question..."
+              className="flex-1 bg-y2k-bg text-white font-mono text-sm px-4 py-3 focus:outline-none placeholder:text-gray-600 disabled:opacity-50"
+            />
+            <button
+              type="submit"
+              disabled={!input.trim() || loading}
+              className="px-4 bg-y2k-bg border-l-2 border-silver text-y2k-cyan hover:text-y2k-pink transition-colors disabled:opacity-30"
+            >
+              <Send size={16} />
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
   );
 };
 
@@ -179,40 +303,33 @@ const MyWork = () => (
             <p className="text-gray-300 text-sm font-mono mb-6 flex-grow leading-relaxed">
               {project.description}
             </p>
-
             <div className="bg-y2k-bg border border-y2k-cyan p-3 mb-5 relative">
               <div className="absolute -top-2.5 left-2 bg-black px-1 text-xs font-mono text-y2k-cyan">IMPACT_LOG</div>
               <p className="text-xs font-mono text-white">
                 <span className="text-y2k-pink">{'>'}</span> {project.impact}
               </p>
             </div>
-
             <div className="flex flex-wrap gap-2 mt-auto pt-4 border-t border-gray-800">
               {project.tags.map((tag, tagIndex) => (
-                <span
-                  key={tagIndex}
-                  className="px-2 py-1 text-[10px] font-mono font-bold text-black bg-y2k-cyan uppercase"
-                >
-                  {tag}
-                </span>
+                <span key={tagIndex} className="px-2 py-1 text-[10px] font-mono font-bold text-black bg-y2k-cyan uppercase">{tag}</span>
               ))}
             </div>
-
             {project.link && (
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 inline-block text-xs font-mono text-y2k-cyan hover:text-y2k-pink underline underline-offset-2 transition-colors"
-              >
-                OPEN_LINK
-              </a>
+              <a href={project.link} target="_blank" rel="noopener noreferrer" className="mt-4 inline-block text-xs font-mono text-y2k-cyan hover:text-y2k-pink underline underline-offset-2 transition-colors">OPEN_LINK</a>
             )}
           </div>
         </div>
       ))}
     </div>
   </section>
+);
+
+const Divider = ({ label }: { label: string }) => (
+  <div className="w-full max-w-4xl mx-auto my-8 border-t-2 border-dashed border-y2k-pink/50 relative">
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-y2k-bg px-4 text-y2k-pink font-mono text-xs">
+      {label}
+    </div>
+  </div>
 );
 
 export default function App() {
@@ -222,13 +339,9 @@ export default function App() {
 
       <main className="relative z-10 py-10">
         <BusinessCard />
-
-        <div className="w-full max-w-4xl mx-auto my-8 border-t-2 border-dashed border-y2k-pink/50 relative">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-y2k-bg px-4 text-y2k-pink font-mono text-xs">
-            SCROLL_DOWN
-          </div>
-        </div>
-
+        <Divider label="ASK_US_ANYTHING" />
+        <Y2KChatbot />
+        <Divider label="SCROLL_DOWN" />
         <MyWork />
       </main>
     </div>

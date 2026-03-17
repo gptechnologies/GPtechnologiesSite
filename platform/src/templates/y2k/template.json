@@ -1,0 +1,13 @@
+{
+  "id": "y2k",
+  "name": "Y2K Retro",
+  "description": "CRT scanlines, neon glow, flipping business card, and Windows 98-style project windows. The full 2000s aesthetic.",
+  "thumbnail": "/templates/y2k/thumb.png",
+  "version": "1.0.0",
+  "sections": [
+    "header",
+    "skills",
+    "work_experience",
+    "projects"
+  ]
+}

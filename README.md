@@ -1,63 +1,71 @@
-# Y2K Interactive Resume
+# Resume Creator
 
-A retro Y2K-themed interactive resume built with React, TypeScript, Tailwind CSS v4, and Vite. Features a 3D-flipping business card and a Windows-style project showcase.
+A SaaS platform that generates deployable resume websites from uploaded resumes. Users pick a style template, describe how it should look, and receive a complete code repository pushed to a shared private GitHub repo.
 
-## Getting Started
+## Repository Structure
 
-**Prerequisites:** [Node.js](https://nodejs.org/) 18+
+```
+├── personal-site/    # Jai's personal Y2K resume (standalone Vite app)
+└── platform/         # Resume Creator SaaS (Next.js)
+    ├── prisma/       # Database schema
+    ├── src/
+    │   ├── app/      # Next.js App Router (pages + API routes)
+    │   ├── lib/      # Core services (auth, credits, stripe, github, codegen, etc.)
+    │   └── templates/ # Style templates (Y2K is v1)
+    └── .env.example  # All required environment variables
+```
+
+## Quick Start
+
+### Personal Site
 
 ```bash
-# 1. Install dependencies
+cd personal-site
 npm install
-
-# 2. Start the dev server (hot-reloads on save)
-npm run dev
+npm run dev          # http://localhost:3000
 ```
 
-Open **http://localhost:3000** in your browser. Any changes you make to files in `src/` will instantly reflect in the browser.
-
-## Testing a Production Build
+### Platform
 
 ```bash
-# Build the optimized bundle
-npm run build
-
-# Serve it locally to verify everything works before deploying
-npm run preview
+cd platform
+npm install
+cp .env.example .env # Fill in your values
+npx prisma db push   # Create database tables
+npm run dev          # http://localhost:3001
 ```
 
-`npm run preview` starts a local server at **http://localhost:4173** serving the exact files that would be deployed.
+## Environment Variables
 
-## Type Checking
+See `platform/.env.example` for the full list. Key services:
 
-```bash
-npm run lint
-```
+| Variable | Service | Required |
+|---|---|---|
+| `DATABASE_URL` | PostgreSQL connection | Yes |
+| `AUTH_SECRET` | NextAuth session encryption | Yes |
+| `AUTH_GITHUB_ID/SECRET` | GitHub OAuth login | Yes |
+| `STRIPE_SECRET_KEY` | Credit purchases | Yes |
+| `STRIPE_WEBHOOK_SECRET` | Payment fulfillment | Yes |
+| `OPENAI_API_KEY` | Code generation LLM | Yes |
+| `GITHUB_PAT` | Private repo creation | Yes |
+| `VERCEL_TOKEN` | One-click deploy | Optional |
 
-Runs the TypeScript compiler in check-only mode — no files are emitted, but all type errors are surfaced.
+## Architecture
 
-## Deploy to Vercel
-
-1. Push this repo to GitHub.
-2. Import the repo at [vercel.com/new](https://vercel.com/new).
-3. Vercel auto-detects Vite — no extra config needed. Click **Deploy**.
-
-Subsequent pushes to `main` will trigger automatic redeployments.
-
-## Project Structure
-
-```
-src/
-├── main.tsx            # React entry point
-├── App.tsx             # Business card + project grid layout
-├── data/
-│   └── projects.tsx    # Project card data (edit here to add/remove cards)
-└── index.css           # Tailwind imports + Y2K custom styles
-```
+1. User signs up (GitHub/Google OAuth) and receives 3 starter credits
+2. User uploads resume PDF, picks a template (Y2K), writes a prompt
+3. Platform parses resume, sends template + data + prompt to LLM
+4. LLM generates a complete Vite project; platform validates the build
+5. User can request AI edits (1 credit per edit)
+6. User pushes code to a shared private GitHub repo
+7. Optional one-click Vercel deployment
 
 ## Tech Stack
 
-- **React 19** + TypeScript (strict mode)
-- **Tailwind CSS v4** (Vite plugin)
-- **Vite 6**
-- **Lucide React** icons
+- **Next.js 15** (App Router) + TypeScript
+- **Prisma** + PostgreSQL
+- **NextAuth v5** (GitHub + Google)
+- **Stripe** (credit purchases)
+- **OpenAI** (code generation)
+- **Octokit** (GitHub repo management)
+- **Tailwind CSS v4**
