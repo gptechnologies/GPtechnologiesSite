@@ -150,7 +150,9 @@ const Y2KChatbot = () => {
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (messages.length > 0) {
+      bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
   }, [messages, loading]);
 
   async function sendMessage(text: string) {
@@ -189,7 +191,7 @@ const Y2KChatbot = () => {
           <div className="flex gap-1">
             <button className="y2k-button" aria-label="Minimize"><Minus size={12} /></button>
             <button className="y2k-button" aria-label="Maximize"><Square size={10} /></button>
-            <button className="y2k-button" aria-label="Close"><X size={12} /></button>
+            <button className="y2k-button" aria-label="Clear chat" onClick={() => { setMessages([]); setInput(''); setError(''); }}><X size={12} /></button>
           </div>
         </div>
 
