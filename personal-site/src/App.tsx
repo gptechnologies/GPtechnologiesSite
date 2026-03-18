@@ -147,11 +147,11 @@ const Y2KChatbot = () => {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (messages.length > 0) {
-      bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (messages.length > 0 && chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
   }, [messages, loading]);
 
@@ -196,7 +196,7 @@ const Y2KChatbot = () => {
         </div>
 
         <div className="bg-black border-4 border-silver border-t-0 flex flex-col" style={{ height: '420px' }}>
-          <div className="flex-1 overflow-y-auto p-4 space-y-3 chat-scrollbar">
+          <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-4 space-y-3 chat-scrollbar">
             <div className="chat-bubble-assistant">
               <span className="text-y2k-cyan font-mono text-xs">{'>'} SYS::</span>
               <p className="text-sm font-mono text-gray-300 mt-1">
@@ -243,7 +243,7 @@ const Y2KChatbot = () => {
               </div>
             )}
 
-            <div ref={bottomRef} />
+            
           </div>
 
           <form
