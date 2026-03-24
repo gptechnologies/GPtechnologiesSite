@@ -8,6 +8,7 @@ export interface Project {
   tags: string[];
   icon: ReactNode;
   link?: string;
+  phone?: string;
 }
 
 export const projects: Project[] = [
@@ -35,6 +36,7 @@ export const projects: Project[] = [
     impact: "Streamlines communication by routing transcripts directly to mobile.",
     tags: ["Telnyx", "RunPod", "Airtable", "AI"],
     icon: <Cpu size={16} className="text-y2k-cyan" />,
+    phone: "5186608016",
   },
   {
     title: "Contract Forecasting Agent",

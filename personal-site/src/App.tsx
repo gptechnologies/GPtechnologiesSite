@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Terminal, ChevronUp, Minus, Square, X, Bot, Send, Loader2, Zap } from 'lucide-react';
+import { Terminal, ChevronUp, Minus, Square, X, Bot, Send, Loader2, Zap, Phone } from 'lucide-react';
 import { projects } from './data/projects';
 
 const skills = [
@@ -316,6 +316,15 @@ const MyWork = () => (
                 <span key={tagIndex} className="px-2 py-1 text-[10px] font-mono font-bold text-black bg-y2k-cyan uppercase">{tag}</span>
               ))}
             </div>
+            {project.phone && (
+              <a
+                href={`tel:+1${project.phone}`}
+                className="mt-4 flex items-center gap-2 text-xs font-mono bg-y2k-cyan/10 border border-y2k-cyan/40 px-3 py-2 rounded text-y2k-cyan hover:bg-y2k-cyan/20 hover:text-white transition-colors group"
+              >
+                <Phone size={13} className="group-hover:animate-pulse" />
+                <span>TRY IT LIVE — (518) 660-8016</span>
+              </a>
+            )}
             {project.link && (
               <a href={project.link} target="_blank" rel="noopener noreferrer" className="mt-4 inline-block text-xs font-mono text-y2k-cyan hover:text-y2k-pink underline underline-offset-2 transition-colors">OPEN_LINK</a>
             )}
