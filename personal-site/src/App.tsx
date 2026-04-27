@@ -209,11 +209,25 @@ function WhatWeDoFlow() {
       <h2 id="what-flow-heading" className="sr-only">
         Convert Data Into Insights
       </h2>
-      <img
-        className="what-flow-graphic"
-        src="/what-we-do-graphic.png"
-        alt="Unstructured data flowing through the GPTechnologies AI Extraction Engine into dashboards, search, KPIs, and trends."
-      />
+      <div className="what-flow-graphic" aria-label="Unstructured data flowing through the GPTechnologies AI Extraction Engine into dashboards, search, KPIs, and trends.">
+        <div className="flow-node flow-node-source">
+          <span>Unstructured Data</span>
+          <p>Files, records, lab outputs, legacy systems</p>
+        </div>
+        <div className="flow-connector" aria-hidden="true" />
+        <div className="flow-node flow-node-engine">
+          <span>GPTechnologies AI Extraction Engine</span>
+          <p>Schema mapping, validation, search-ready database</p>
+        </div>
+        <div className="flow-connector" aria-hidden="true" />
+        <div className="flow-output-grid">
+          {['Dashboards', 'Search', 'KPIs', 'Trends'].map((label) => (
+            <div className="flow-node flow-node-output" key={label}>
+              {label}
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
