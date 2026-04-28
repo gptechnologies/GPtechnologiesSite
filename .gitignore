@@ -8,3 +8,7 @@ coverage/
 .env*
 !.env.example
 Jai_Mangat_Resume.pdf
+
+# Playwright / local screenshot output
+output/
+.playwright-cli/

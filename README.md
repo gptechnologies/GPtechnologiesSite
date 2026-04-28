@@ -1,71 +1,49 @@
-# Resume Creator
+# GPTechnologies Personal Site
 
-A SaaS platform that generates deployable resume websites from uploaded resumes. Users pick a style template, describe how it should look, and receive a complete code repository pushed to a shared private GitHub repo.
+Retro Y2K-themed personal site for Jai Mangat and GPTechnologies. The app showcases AI agents, business automation services, selected projects, and a small chatbot.
 
 ## Repository Structure
 
-```
-├── personal-site/    # Jai's personal Y2K resume (standalone Vite app)
-└── platform/         # Resume Creator SaaS (Next.js)
-    ├── prisma/       # Database schema
-    ├── src/
-    │   ├── app/      # Next.js App Router (pages + API routes)
-    │   ├── lib/      # Core services (auth, credits, stripe, github, codegen, etc.)
-    │   └── templates/ # Style templates (Y2K is v1)
-    └── .env.example  # All required environment variables
+```text
+personal-site/
+├── api/
+│   └── chat.ts            # Vercel serverless function for the chatbot
+├── src/
+│   ├── main.tsx           # React entry point
+│   ├── App.tsx            # Business card, chatbot, and project grid
+│   ├── data/
+│   │   └── projects.tsx   # Project card data
+│   └── index.css          # Tailwind imports and Y2K custom styles
+├── .env.example           # Chatbot environment variable template
+├── vercel.json            # Vercel routing config
+└── package.json
 ```
 
 ## Quick Start
 
-### Personal Site
-
 ```bash
 cd personal-site
 npm install
-npm run dev          # http://localhost:3000
+npm run dev
 ```
 
-### Platform
+Open `http://localhost:3000`.
+
+## Chatbot
+
+The chatbot calls the server-side `/api/chat` proxy so the API key is not exposed in the browser.
 
 ```bash
-cd platform
-npm install
-cp .env.example .env # Fill in your values
-npx prisma db push   # Create database tables
-npm run dev          # http://localhost:3001
+cp .env.example .env
 ```
 
-## Environment Variables
+Set `OPENAI_API_KEY` in `.env`. For local development with the serverless function, use `vercel dev`.
 
-See `platform/.env.example` for the full list. Key services:
+## Scripts
 
-| Variable | Service | Required |
-|---|---|---|
-| `DATABASE_URL` | PostgreSQL connection | Yes |
-| `AUTH_SECRET` | NextAuth session encryption | Yes |
-| `AUTH_GITHUB_ID/SECRET` | GitHub OAuth login | Yes |
-| `STRIPE_SECRET_KEY` | Credit purchases | Yes |
-| `STRIPE_WEBHOOK_SECRET` | Payment fulfillment | Yes |
-| `OPENAI_API_KEY` | Code generation LLM | Yes |
-| `GITHUB_PAT` | Private repo creation | Yes |
-| `VERCEL_TOKEN` | One-click deploy | Optional |
-
-## Architecture
-
-1. User signs up (GitHub/Google OAuth) and receives 3 starter credits
-2. User uploads resume PDF, picks a template (Y2K), writes a prompt
-3. Platform parses resume, sends template + data + prompt to LLM
-4. LLM generates a complete Vite project; platform validates the build
-5. User can request AI edits (1 credit per edit)
-6. User pushes code to a shared private GitHub repo
-7. Optional one-click Vercel deployment
-
-## Tech Stack
-
-- **Next.js 15** (App Router) + TypeScript
-- **Prisma** + PostgreSQL
-- **NextAuth v5** (GitHub + Google)
-- **Stripe** (credit purchases)
-- **OpenAI** (code generation)
-- **Octokit** (GitHub repo management)
-- **Tailwind CSS v4**
+```bash
+npm run dev
+npm run build
+npm run preview
+npm run lint
+```

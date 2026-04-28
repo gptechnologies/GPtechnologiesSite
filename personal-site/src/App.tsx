@@ -183,7 +183,7 @@ function PartnerRow() {
         {partnerNames.map((name, index) => (
           <span
             key={name}
-            style={{ ['--trust-delay' as string]: `${600 + index * 330}ms` }}
+            style={{ ['--trust-delay' as string]: `${900 + index * 495}ms` }}
           >
             <ShieldCheck size={16} strokeWidth={1.6} />
             {name}

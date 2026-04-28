@@ -383,7 +383,7 @@ body {
   text-transform: uppercase;
   text-shadow: 0 2px 18px rgba(0, 0, 0, 0.68);
   opacity: 0;
-  animation: fade-rise 700ms 350ms var(--ease-out) both;
+  animation: fade-rise 1050ms 700ms var(--ease-out) both;
 }
 
 .partner-row {
@@ -404,7 +404,7 @@ body {
   white-space: nowrap;
   text-transform: uppercase;
   opacity: 0;
-  animation: fade-rise 1050ms var(--trust-delay, 600ms) var(--ease-out) both;
+  animation: fade-rise 1575ms var(--trust-delay, 900ms) var(--ease-out) both;
 }
 
 .partner-row svg {
