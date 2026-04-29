@@ -68,7 +68,9 @@ type GlassButtonProps = {
 
 const navItems = [
   { label: 'Home', href: '#home' },
-  { label: 'How We Excel', href: '#how-we-excel' },
+  { label: 'Customers', href: '#customers' },
+  { label: 'Platform', href: '#platform' },
+  { label: 'How We Work', href: '#how-we-work' },
   { label: 'Research', href: '#research' },
 ];
 
@@ -79,10 +81,99 @@ const partnerNames = [
   'Zero Data Retention',
 ];
 
-const howWeExcelItems = [
-  'First, we help you rapidly identify where your data exists and map a schema of all relevant data points.',
-  'Next, we use AI and machine learning models to create an automatic pipeline that will pull your data into a searchable database.',
-  'We use this database as the source to create an infinite amount of dashboards, KPIs, and reports that answer real business questions.',
+const proofCards = [
+  {
+    name: 'Diagnostics operator',
+    role: 'Clinical operations lead',
+    quote:
+      'GPTechnologies helped us turn case notes, intake files, and lab outputs into a searchable operating layer our team can actually trust.',
+    result: 'Mapped 18 source systems',
+  },
+  {
+    name: 'Biotech analytics team',
+    role: 'Data science director',
+    quote:
+      'The work gave our team a practical route from scattered research records to repeatable dashboards without waiting on a platform rebuild.',
+    result: 'Reduced manual reporting cycles',
+  },
+];
+
+const narrativeBeats = [
+  {
+    label: 'Problem',
+    title: 'Complex records slow down teams that need precise answers',
+    summary:
+      'Life sciences teams have useful data spread across PDFs, spreadsheets, lab systems, intake notes, and legacy databases. The work becomes manual, brittle, and hard to audit.',
+  },
+  {
+    label: 'Solution',
+    title: 'Build a controlled intelligence layer around the data you already own',
+    summary:
+      'We map the data, extract it into a governed structure, and turn it into searchable workflows, dashboards, and repeatable answers your team can use every day.',
+  },
+];
+
+const securityFeatures = [
+  {
+    title: 'Governed extraction',
+    description:
+      'Schema mapping, review queues, and validation checkpoints keep extracted data understandable before it reaches production workflows.',
+  },
+  {
+    title: 'Private deployment path',
+    description:
+      'We design around your vendor, BAA, retention, and access-control requirements instead of forcing sensitive data through a generic toolchain.',
+  },
+  {
+    title: 'Auditable outputs',
+    description:
+      'Dashboards and search experiences are tied back to known sources so teams can inspect where the answer came from.',
+  },
+];
+
+const platformInputs = [
+  'PDFs',
+  'Lab outputs',
+  'Spreadsheets',
+  'Legacy systems',
+];
+
+const platformOutputs = [
+  'Search',
+  'Dashboards',
+  'KPIs',
+  'Workflows',
+];
+
+const processSteps = [
+  {
+    number: '01',
+    title: 'Map',
+    description:
+      'We inventory the source systems, identify the entities that matter, and define a schema your team can inspect before extraction begins.',
+    visual: 'map',
+  },
+  {
+    number: '02',
+    title: 'Extract',
+    description:
+      'Purpose-built AI pipelines pull structured fields from documents, notes, and records while routing uncertain outputs through review.',
+    visual: 'extract',
+  },
+  {
+    number: '03',
+    title: 'Validate',
+    description:
+      'Human checks, source links, and quality rules keep the data trustworthy enough to become the foundation for analytics and workflows.',
+    visual: 'validate',
+  },
+  {
+    number: '04',
+    title: 'Operate',
+    description:
+      'The governed database powers dashboards, search, reporting, and automated workflows that improve as new records arrive.',
+    visual: 'operate',
+  },
 ];
 
 const researchArticles = [
@@ -167,7 +258,7 @@ function HeroCopy() {
 
       <div className="hero-actions">
         <GlassButton href="#research">See our work</GlassButton>
-        <GlassButton href="#how-we-excel" variant="secondary" icon={Play}>
+        <GlassButton href="#intelligence-flow" variant="secondary" icon={Play}>
           See How it Works
         </GlassButton>
       </div>
@@ -203,65 +294,203 @@ function LandingOverlay() {
   );
 }
 
-function WhatWeDoFlow() {
+function ProofSection() {
   return (
-    <div className="what-flow-section" aria-labelledby="what-flow-heading">
-      <h2 id="what-flow-heading" className="sr-only">
-        Convert Data Into Insights
-      </h2>
-      <div className="what-flow-graphic" aria-label="Unstructured data flowing through the GPTechnologies AI Extraction Engine into dashboards, search, KPIs, and trends.">
-        <div className="flow-node flow-node-source">
-          <span>Unstructured Data</span>
-          <p>Files, records, lab outputs, legacy systems</p>
-        </div>
-        <div className="flow-connector" aria-hidden="true" />
-        <div className="flow-node flow-node-engine">
-          <span>GPTechnologies AI Extraction Engine</span>
-          <p>Schema mapping, validation, search-ready database</p>
-        </div>
-        <div className="flow-connector" aria-hidden="true" />
-        <div className="flow-output-grid">
-          {['Dashboards', 'Search', 'KPIs', 'Trends'].map((label) => (
-            <div className="flow-node flow-node-output" key={label}>
-              {label}
+    <section id="customers" className="proof-section" aria-labelledby="proof-heading">
+      <div className="section-kicker" id="proof-heading">
+        Deployed with teams that need trusted operational data
+      </div>
+      <div className="proof-grid">
+        {proofCards.map((card, index) => (
+          <article
+            className="proof-card reveal-on-scroll"
+            style={{ ['--reveal-delay' as string]: `${index * 140}ms` }}
+            key={card.name}
+          >
+            <div>
+              <p className="proof-name">{card.name}</p>
+              <span className="proof-role">{card.role}</span>
             </div>
-          ))}
+            <blockquote>{card.quote}</blockquote>
+            <div className="proof-result">
+              <span>{card.result}</span>
+              <ArrowUpRight size={18} strokeWidth={1.7} aria-hidden="true" />
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function NarrativeSection() {
+  return (
+    <section id="intelligence-flow" className="narrative-section" aria-labelledby="narrative-heading">
+      <h2 id="narrative-heading" className="sr-only">
+        From scattered data to trusted intelligence
+      </h2>
+      <div className="narrative-rail" aria-hidden="true" />
+      <div className="narrative-stack">
+        {narrativeBeats.map((beat, index) => (
+          <article
+            className="narrative-beat reveal-on-scroll"
+            style={{ ['--reveal-delay' as string]: `${index * 160}ms` }}
+            key={beat.label}
+          >
+            <p>{beat.label}</p>
+            <h3>{beat.title}</h3>
+            <span>{beat.summary}</span>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function PlatformSection() {
+  return (
+    <section id="platform" className="platform-section" aria-labelledby="platform-heading">
+      <div className="platform-label">The platform</div>
+      <div className="platform-heading">
+        <h2 id="platform-heading">A controlled data layer for life sciences operations</h2>
+        <p>
+          GPTechnologies connects scattered records to a governed extraction engine, then routes clean data into the places where teams make decisions.
+        </p>
+      </div>
+
+      <div className="platform-panel">
+        <div className="platform-diagram" aria-label="Data sources flowing into the GPTechnologies extraction engine and out to search, dashboards, KPIs, and workflows.">
+          <div className="platform-column platform-column-inputs">
+            {platformInputs.map((input) => (
+              <span key={input}>{input}</span>
+            ))}
+          </div>
+          <div className="platform-lane" aria-hidden="true" />
+          <div className="platform-core">
+            <span>GPTechnologies</span>
+            <strong>AI extraction engine</strong>
+            <p>Schema mapping, validation, source links, governed database</p>
+          </div>
+          <div className="platform-lane" aria-hidden="true" />
+          <div className="platform-column platform-column-outputs">
+            {platformOutputs.map((output) => (
+              <span key={output}>{output}</span>
+            ))}
+          </div>
         </div>
+
+        <aside className="platform-copy">
+          <h3>The operating layer</h3>
+          <p>
+            The goal is not another disconnected dashboard. The platform creates a shared source of truth that can answer questions, trigger workflows, and keep data traceable.
+          </p>
+          <div className="platform-tags">
+            <span>Source linked</span>
+            <span>Reviewable</span>
+            <span>Search ready</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+  );
+}
+
+function ProcessVisual({ type }: { type: string }) {
+  return (
+    <div className={`process-visual process-visual-${type}`} aria-hidden="true">
+      <div className="visual-toolbar">
+        <span />
+        <span />
+        <span />
+      </div>
+      <div className="visual-stage">
+        <span />
+        <span />
+        <span />
+        <span />
+      </div>
+      <div className="visual-meter">
+        <span />
       </div>
     </div>
   );
 }
 
-function HowWeExcelSection() {
+function ProcessSection() {
   return (
-    <section id="how-we-excel" className="belowground-section" aria-labelledby="how-excel-heading">
-      <div className="section-heading section-heading-left excellence-heading">
-        <p>How we excel</p>
-        <h2 id="how-excel-heading">From scattered records to decision-ready intelligence in 3 steps</h2>
-        <ol className="excellence-list" aria-label="How GPTechnologies turns scattered records into intelligence">
-          {howWeExcelItems.map((item, index) => (
-            <li
-              className="excellence-list-item reveal-on-scroll"
-              style={{ ['--reveal-delay' as string]: `${index * 195}ms` }}
-              key={item}
-            >
-              {item}
-            </li>
-          ))}
-        </ol>
+    <section id="how-we-work" className="process-section" aria-labelledby="process-heading">
+      <div className="process-heading">
+        <p>How we work</p>
+        <h2 id="process-heading">From fragmented records to intelligence your team can operate</h2>
       </div>
 
-      <WhatWeDoFlow />
+      <div className="process-layout">
+        <ol className="process-index" aria-label="Process steps">
+          {processSteps.map((step) => (
+            <li key={step.number}>{step.number}</li>
+          ))}
+        </ol>
+
+        <div className="process-list">
+          {processSteps.map((step, index) => (
+            <article
+              className="process-step"
+              style={{ ['--reveal-delay' as string]: `${index * 120}ms` }}
+              key={step.number}
+            >
+              <div className="process-copy">
+                <span>{step.number}</span>
+                <h3>{step.title}</h3>
+                <p>{step.description}</p>
+              </div>
+              <ProcessVisual type={step.visual} />
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SecuritySection() {
+  return (
+    <section id="security" className="security-section" aria-labelledby="security-heading">
+      <div className="security-heading">
+        <p>Security</p>
+        <h2 id="security-heading">Your data stays governed from extraction to answer</h2>
+        <span>
+          We structure AI workflows around privacy, source traceability, and human review so useful automation does not create a new data risk.
+        </span>
+        <div className="security-badges" aria-label="Security posture">
+          {partnerNames.map((name) => (
+            <span key={name}>{name}</span>
+          ))}
+        </div>
+      </div>
+
+      <div className="security-grid">
+        {securityFeatures.map((feature, index) => (
+          <article
+            className="security-card reveal-on-scroll"
+            style={{ ['--reveal-delay' as string]: `${index * 110}ms` }}
+            key={feature.title}
+          >
+            <div className="security-glyph" aria-hidden="true" />
+            <h3>{feature.title}</h3>
+            <p>{feature.description}</p>
+          </article>
+        ))}
+      </div>
     </section>
   );
 }
 
 function ResearchSection() {
   return (
-    <section id="research" className="content-section research-section" aria-labelledby="research-heading">
-      <div className="section-heading section-heading-left section-heading-page-left">
+    <section id="research" className="research-section" aria-labelledby="research-heading">
+      <div className="research-heading">
         <p>Research</p>
-        <h2 id="research-heading">A selection of research and work we want to highlight</h2>
+        <h2 id="research-heading">Practical notes from the data infrastructure work</h2>
       </div>
 
       <div className="research-list" aria-label="Upcoming research articles">
@@ -281,6 +510,29 @@ function ResearchSection() {
         ))}
       </div>
     </section>
+  );
+}
+
+function FooterCta({ onOpenContact }: TopNavProps) {
+  return (
+    <footer className="footer-cta">
+      <div>
+        <p>Turn scattered records into operating intelligence</p>
+        <button className="nav-cta" type="button" onClick={onOpenContact}>
+          <span>Book a working session</span>
+          <span className="nav-cta-icon" aria-hidden="true">
+            <ArrowUpRight size={16} strokeWidth={1.8} />
+          </span>
+        </button>
+      </div>
+      <div className="footer-meta">
+        <a className="brand" href="/">
+          <LogoMark />
+          <span>GPTechnologies</span>
+        </a>
+        <span>© 2026 GPTechnologies. All rights reserved.</span>
+      </div>
+    </footer>
   );
 }
 
@@ -375,9 +627,7 @@ function ContactModal({ isOpen, onClose }: ContactModalProps) {
         <div className="contact-modal-heading">
           <p>Contact</p>
           <h2 id="contact-modal-heading">Tell us what you want your data to answer</h2>
-          <span>
-            Share the systems, records, or reporting problems you want to improve. We will use this form as the front-end shell until submission handling is connected.
-          </span>
+          <span>Share the systems, records, or reporting problems you want to improve.</span>
         </div>
 
         <form className="contact-form contact-form-modal" onSubmit={handleSubmit}>
@@ -448,8 +698,15 @@ export default function App() {
       <section id="home" className="hero-section" aria-label="GPTechnologies landing hero">
         <LandingOverlay />
       </section>
-      <HowWeExcelSection />
-      <ResearchSection />
+      <div className="site-flow">
+        <ProofSection />
+        <NarrativeSection />
+        <PlatformSection />
+        <ProcessSection />
+        <SecuritySection />
+        <ResearchSection />
+        <FooterCta onOpenContact={() => setIsContactOpen(true)} />
+      </div>
       <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
     </main>
   );
