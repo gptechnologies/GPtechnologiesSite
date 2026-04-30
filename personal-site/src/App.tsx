@@ -417,8 +417,45 @@ function ProcessVisual({ type }: { type: string }) {
 }
 
 function ProcessSection() {
+  const [activeProcessIndex, setActiveProcessIndex] = useState(0);
+  const stepRefs = useRef<Array<HTMLElement | null>>([]);
+
+  useEffect(() => {
+    if (!('IntersectionObserver' in window)) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntry = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (!visibleEntry) return;
+
+        const index = Number((visibleEntry.target as HTMLElement).dataset.processIndex);
+        if (Number.isFinite(index)) {
+          setActiveProcessIndex(index);
+        }
+      },
+      {
+        rootMargin: '-34% 0px -42% 0px',
+        threshold: [0.18, 0.36, 0.54, 0.72],
+      }
+    );
+
+    stepRefs.current.forEach((step) => {
+      if (step) observer.observe(step);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="how-we-work" className="process-section" aria-labelledby="process-heading">
+    <section
+      id="how-we-work"
+      className="process-section"
+      aria-labelledby="process-heading"
+      style={{ ['--process-progress' as string]: `${activeProcessIndex / (processSteps.length - 1)}` }}
+    >
       <div className="process-heading">
         <p>How we work</p>
         <h2 id="process-heading">From fragmented records to intelligence your team can operate</h2>
@@ -426,16 +463,29 @@ function ProcessSection() {
 
       <div className="process-layout">
         <ol className="process-index" aria-label="Process steps">
-          {processSteps.map((step) => (
-            <li key={step.number}>{step.number}</li>
+          {processSteps.map((step, index) => (
+            <li
+              className={activeProcessIndex === index ? 'is-active' : undefined}
+              aria-current={activeProcessIndex === index ? 'step' : undefined}
+              key={step.number}
+            >
+              {step.number}
+            </li>
           ))}
         </ol>
 
         <div className="process-list">
           {processSteps.map((step, index) => (
             <article
-              className="process-step"
-              style={{ ['--reveal-delay' as string]: `${index * 120}ms` }}
+              className={`process-step${activeProcessIndex === index ? ' is-active' : ''}`}
+              data-process-index={index}
+              ref={(element) => {
+                stepRefs.current[index] = element;
+              }}
+              style={{
+                ['--process-step-index' as string]: index,
+                ['--reveal-delay' as string]: `${index * 120}ms`,
+              }}
               key={step.number}
             >
               <div className="process-copy">

@@ -37,7 +37,7 @@ html {
 }
 
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
   background: #020807;
   color: #f6fffd;
   font-weight: 500;
@@ -48,7 +48,7 @@ body {
   isolation: isolate;
   width: 100%;
   min-height: 200dvh;
-  overflow-x: hidden;
+  overflow-x: clip;
   background: transparent;
 }
 
@@ -829,7 +829,7 @@ body {
 .site-flow {
   position: relative;
   z-index: 2;
-  overflow: hidden;
+  overflow: visible;
   background:
     radial-gradient(circle at 14% 6%, rgba(70, 221, 202, 0.11), transparent 26rem),
     linear-gradient(180deg, rgba(2, 8, 7, 0.94), #030b0b 18rem, #050f10 100%);
@@ -1009,27 +1009,6 @@ body {
     rgba(103, 242, 223, 0)
   );
   transform: translateX(-50%);
-}
-
-.narrative-rail::before,
-.narrative-rail::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  width: 7px;
-  height: 7px;
-  border: 1px solid rgba(181, 255, 246, 0.5);
-  background: var(--accent);
-  transform: translateX(-50%);
-  box-shadow: 0 0 20px rgba(70, 221, 202, 0.5);
-}
-
-.narrative-rail::before {
-  top: 20%;
-}
-
-.narrative-rail::after {
-  top: 66%;
 }
 
 .narrative-stack {
@@ -1280,6 +1259,7 @@ body {
   gap: clamp(36px, 5vw, 70px);
   padding-block: clamp(88px, 11vw, 158px);
   scroll-margin-top: 96px;
+  --process-progress: 0;
   background:
     radial-gradient(circle at 18% 30%, rgba(70, 221, 202, 0.08), transparent 24rem),
     linear-gradient(180deg, rgba(2, 12, 13, 0.94), rgba(4, 14, 15, 0.98));
@@ -1293,8 +1273,9 @@ body {
 
 .process-layout {
   display: grid;
-  grid-template-columns: 44px minmax(0, 1fr);
+  grid-template-columns: 58px minmax(0, 1fr);
   gap: clamp(24px, 4vw, 52px);
+  align-items: start;
 }
 
 .process-index {
@@ -1304,8 +1285,26 @@ body {
   align-self: start;
   gap: 13px;
   margin: 2px 0 0;
-  padding: 0;
+  padding: 4px 0 4px 16px;
   list-style: none;
+}
+
+.process-index::before,
+.process-index::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 1px;
+  background: rgba(181, 255, 246, 0.16);
+}
+
+.process-index::after {
+  bottom: auto;
+  height: calc((100% - 8px) * var(--process-progress));
+  background: linear-gradient(180deg, var(--accent-strong), rgba(103, 242, 223, 0.24));
+  transition: height 420ms var(--ease-out);
 }
 
 .process-index li {
@@ -1314,28 +1313,56 @@ body {
   font-weight: 760;
   letter-spacing: 0.12em;
   font-variant-numeric: tabular-nums;
+  transition:
+    color 320ms var(--ease-out),
+    opacity 320ms var(--ease-out),
+    transform 320ms var(--ease-out);
 }
 
-.process-index li:first-child {
+.process-index li.is-active {
   color: var(--accent-strong);
+  opacity: 1;
+  transform: translateX(4px);
 }
 
 .process-list {
-  display: grid;
+  display: block;
 }
 
 .process-step {
+  position: sticky;
+  top: calc(96px + (var(--process-step-index) * 16px));
+  z-index: calc(1 + var(--process-step-index));
   display: grid;
   grid-template-columns: minmax(260px, 0.58fr) minmax(360px, 1fr);
   gap: clamp(26px, 5vw, 72px);
   align-items: center;
-  min-height: clamp(420px, 48vw, 620px);
-  padding-block: clamp(34px, 5vw, 70px);
+  min-height: clamp(440px, 64vh, 660px);
+  margin-bottom: clamp(210px, 38vh, 360px);
+  padding: clamp(34px, 5vw, 70px) clamp(18px, 3vw, 38px);
   border-top: 1px solid rgba(181, 255, 246, 0.12);
+  border-bottom: 1px solid rgba(181, 255, 246, 0.08);
+  background:
+    radial-gradient(circle at 82% 25%, rgba(70, 221, 202, 0.1), transparent 24rem),
+    linear-gradient(180deg, rgba(3, 13, 14, 0.99), rgba(4, 14, 15, 0.99));
+  box-shadow: 0 -22px 54px rgba(0, 0, 0, 0.24);
+  transform: translateY(14px) scale(0.986);
+  transform-origin: top center;
+  transition:
+    transform 520ms var(--ease-out),
+    opacity 520ms var(--ease-out),
+    border-color 520ms var(--ease-out);
+  will-change: transform;
+}
+
+.process-step.is-active {
+  border-color: rgba(181, 255, 246, 0.24);
+  transform: translateY(0) scale(1);
 }
 
 .process-step:last-child {
   border-bottom: 1px solid rgba(181, 255, 246, 0.12);
+  margin-bottom: clamp(90px, 14vh, 160px);
 }
 
 .process-copy {
@@ -2129,10 +2156,21 @@ body {
   .process-index {
     position: static;
     display: flex;
+    padding-left: 0;
+  }
+
+  .process-index::before,
+  .process-index::after {
+    display: none;
   }
 
   .process-step {
+    position: relative;
+    top: auto;
     grid-template-columns: 1fr;
+    margin-bottom: 0;
+    transform: none;
+    will-change: auto;
   }
 
   .narrative-section {
