@@ -28,10 +28,19 @@ function App() {
               <article>
                 <h2>{project.title}</h2>
                 <p>{project.description}</p>
-                {project.link ? (
-                  <a href={project.link} target="_blank" rel="noreferrer">
-                    View project <span aria-hidden="true">↗</span>
-                  </a>
+                {project.link || project.resources?.length ? (
+                  <div className="project-links">
+                    {project.link ? (
+                      <a href={project.link} target="_blank" rel="noreferrer">
+                        View project <span aria-hidden="true">↗</span>
+                      </a>
+                    ) : null}
+                    {project.resources?.map((resource) => (
+                      <a href={resource.href} target="_blank" rel="noreferrer" key={resource.label}>
+                        {resource.label} <span aria-hidden="true">↗</span>
+                      </a>
+                    ))}
+                  </div>
                 ) : null}
               </article>
             </li>

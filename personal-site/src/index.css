@@ -190,24 +190,31 @@ a {
   text-wrap: pretty;
 }
 
-.timeline-item a {
-  display: inline-block;
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 1.25rem;
   margin-top: 1rem;
+}
+
+.project-links a {
+  display: inline-block;
   padding-bottom: 0.2rem;
   border-bottom: 1px solid currentColor;
   font-size: 0.88rem;
   font-weight: 600;
   letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
   text-decoration: none;
   transition: color 180ms ease, transform 180ms ease;
 }
 
-.timeline-item a:hover {
+.project-links a:hover {
   color: var(--wood);
   transform: translateY(-1px);
 }
 
-.timeline-item a:focus-visible {
+.project-links a:focus-visible {
   outline: 2px solid var(--wood);
   outline-offset: 0.35rem;
 }
@@ -271,7 +278,7 @@ a {
     scroll-behavior: auto;
   }
 
-  .timeline-item a {
+  .project-links a {
     transition: none;
   }
 }

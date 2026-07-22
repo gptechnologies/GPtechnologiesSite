@@ -3,6 +3,10 @@ export interface Project {
   title: string;
   description: string;
   link?: string;
+  resources?: Array<{
+    label: string;
+    href: string;
+  }>;
 }
 
 // Add, remove, or reorder projects here. Dates display in Month Year format.
@@ -13,6 +17,23 @@ export const projects: Project[] = [
     description:
       'Decentralized P2P escrow protocol deployed on Ethereum and Arbitrum. Any parties with a wallet can set terms and arbitrators to deploy an escrow from the factory. The immutable escrow contract holds funds until the settlement date, then releases them through mutual confirmation or designated arbitrators. Everything uses signed transactions with no custody of funds or wallet approvals. Successful escrows pay a 1% fee capped at $1 USDC.',
     link: 'https://sendacrow.xyz',
+    resources: [
+      {
+        label: 'Arbitrum factory: 0x0798065Ea3867CaEBa7bBF124E0B599f70226ABE',
+        href: 'https://arbiscan.io/address/0x0798065Ea3867CaEBa7bBF124E0B599f70226ABE#code',
+      },
+      {
+        label: 'Ethereum factory: 0x0798065Ea3867CaEBa7bBF124E0B599f70226ABE',
+        href: 'https://etherscan.io/address/0x0798065Ea3867CaEBa7bBF124E0B599f70226ABE#code',
+      },
+    ],
+  },
+  {
+    date: 'July 2026',
+    title: 'Commitment of Traders Charts',
+    description:
+      'A public tool that visualizes weekly Commitment of Traders data for non-commercial positions, built because I could not find an existing tool that did it. Updates weekly.',
+    link: 'https://cot-chartsv4.vercel.app/',
   },
   {
     date: 'July 2026',
