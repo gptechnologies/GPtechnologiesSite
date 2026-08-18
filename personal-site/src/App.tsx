@@ -6,7 +6,7 @@ function App() {
       <section className="hero" aria-label="GPTechnologies introduction">
         <div className="hero-artwork">
           <img
-            src="/GPTechnologiesWebsite.png"
+            src="/GPTechnologiesWebsitev5.png"
             alt="Hand-drawn GPTechnologies illustration with the message: This is our website."
           />
           <a className="see-more" href="#projects" aria-label="Scroll down to projects">
