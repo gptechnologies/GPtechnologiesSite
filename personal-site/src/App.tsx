@@ -26,22 +26,24 @@ function App() {
             <li className="timeline-item" key={project.title}>
               <time>{project.date}</time>
               <article>
-                <h2>{project.title}</h2>
+                <div className="project-summary">
+                  <h2>{project.title}</h2>
+                  {project.link || project.resources?.length ? (
+                    <div className="project-links">
+                      {project.link ? (
+                        <a href={project.link} target="_blank" rel="noreferrer">
+                          View project <span aria-hidden="true">↗</span>
+                        </a>
+                      ) : null}
+                      {project.resources?.map((resource) => (
+                        <a href={resource.href} target="_blank" rel="noreferrer" key={resource.label}>
+                          {resource.label} <span aria-hidden="true">↗</span>
+                        </a>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
                 <p>{project.description}</p>
-                {project.link || project.resources?.length ? (
-                  <div className="project-links">
-                    {project.link ? (
-                      <a href={project.link} target="_blank" rel="noreferrer">
-                        View project <span aria-hidden="true">↗</span>
-                      </a>
-                    ) : null}
-                    {project.resources?.map((resource) => (
-                      <a href={resource.href} target="_blank" rel="noreferrer" key={resource.label}>
-                        {resource.label} <span aria-hidden="true">↗</span>
-                      </a>
-                    ))}
-                  </div>
-                ) : null}
               </article>
             </li>
           ))}
