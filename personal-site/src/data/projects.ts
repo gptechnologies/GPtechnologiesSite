@@ -12,6 +12,12 @@ export interface Project {
 // Add, remove, or reorder projects here. Dates display in Month Year format.
 export const projects: Project[] = [
   {
+    date: 'October 2026',
+    title: 'ChainIdeas',
+    description:
+      'A free scanner similar to TradeIdeas that discovers new trading pairs through liquidity pools on Solana and Robinhood Chain, then screens them using professional stock-screening criteria. Includes alerts and customizable filters to build a variety of screeners.',
+  },
+  {
     date: 'July 2026',
     title: 'Crow',
     description:
@@ -29,7 +35,7 @@ export const projects: Project[] = [
     ],
   },
   {
-    date: 'July 2026',
+    date: 'October 2026',
     title: 'Commitment of Traders Charts',
     description:
       'A public tool that visualizes weekly Commitment of Traders data for non-commercial positions, built because I could not find an existing tool that did it. Updates weekly.',
