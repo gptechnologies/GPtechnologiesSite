@@ -31,8 +31,8 @@ export const projects: Project[] = [
     id: 'crow',
     category: 'Onchain agreements',
     figure: 'A shared agreement',
-    activity: 'Fund → confirm → release',
-    visualDescription: 'Two wallets fund an escrow vault. Both parties confirm before funds are released.',
+    activity: 'Terms → funding → settlement → release',
+    visualDescription: 'An illustrative escrow with a $250 amount and settlement date. The provider creates the terms and designates the arbitrator above the contract. The buyer deposits coins, filling the funds bar gold. The provider accepts the funded agreement, turning the bar green. At settlement, the arbitrator sends a signature and the funds are released to the provider.',
     date: 'July 2026',
     title: 'Crow',
     description:

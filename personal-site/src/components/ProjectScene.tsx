@@ -100,35 +100,102 @@ function ScannerScene() {
   </>;
 }
 
+function EscrowCoin({ x, y, className }: { x: number; y: number; className: string }) {
+  return <g transform={'translate(' + x + ' ' + y + ')'}><g className={className}>
+    <ellipse cx="2" rx="9" ry="11" className="crow-coin-edge" />
+    <ellipse rx="9" ry="11" className="crow-coin-face" />
+    <text y="3.5" textAnchor="middle" className="crow-coin-symbol">$</text>
+  </g></g>;
+}
+
 function EscrowScene() {
   return <>
-    <Platform />
-    <g transform="translate(280 145)">
-      <Box x={0} y={0} width={70} depth={70} height={108} />
-      <path d="m-57 48 43 22v70l-43-22Z" className="vault-door" />
-      <ellipse cx="-35" cy="93" rx="13" ry="18" className="vault-dial" />
-      <path d="m-35 78 0 30m-10-20 20 10" className="fine-line" />
-      <circle cx="39" cy="98" r="3" className="green-light breathe" />
-      <path d="m10 15 18 9 18-9-18-9Z" className="vault-slot" />
+    <g transform="translate(280 300) scale(1.16 1.06) translate(-280 -289)">
+      <Platform />
     </g>
-    <g transform="translate(128 216)">
+
+    <path d="M180 260 218 270M364 269 398 261M280 103v41" className="flow-line" />
+
+    <g transform="translate(108 226)">
       <path d="m0 0 58 12v52L0 52Z" className="wallet" />
       <path d="m38 28 26 5v20l-26-5Z" className="wallet-flap" />
       <circle cx="49" cy="39" r="2" className="warm-light" />
-      <text x="0" y="82" className="svg-label">PARTY A</text>
+      <text x="31" y="81" textAnchor="middle" className="crow-role">BUYER</text>
+      <text x="31" y="94" textAnchor="middle" className="crow-role-note crow-wallet-note">Funds escrow</text>
     </g>
+
     <g transform="translate(397 229)">
       <path d="m0 0 58 12v52L0 52Z" className="wallet" />
       <path d="m38 28 26 5v20l-26-5Z" className="wallet-flap" />
       <circle cx="49" cy="39" r="2" className="warm-light" />
-      <text x="0" y="83" className="svg-label">PARTY B</text>
+      <text x="31" y="81" textAnchor="middle" className="crow-role">PROVIDER</text>
+      <text x="31" y="94" textAnchor="middle" className="crow-role-note crow-wallet-note">Creates terms</text>
     </g>
-    <path d="M192 250 237 269m114-6 39-12" className="flow-line" />
-    <Token x={192} y={250} label="$" className="escrow-in" />
-    <Token x={349} y={262} label="$" className="escrow-out" />
-    <Check x={177} y={205} className="confirm-one" />
-    <Check x={424} y={212} className="confirm-two" />
-    <text x="254" y="331" className="svg-label">ESCROW</text>
+
+    <g>
+      <path d="M218 158 240 144 364 162 342 176Z" className="box-top" />
+      <path d="M218 158 342 176v136l-124-18Z" className="crow-contract-front" />
+      <path d="M342 176 364 162v136l-22 14Z" className="box-side" />
+      <path d="m265 158 32 5 13-7-32-5Z" className="vault-slot" />
+      <g transform="matrix(1 .145 0 1 226 173)">
+        <text y="10" className="crow-contract-label">ESCROW CONTRACT</text>
+        <text y="35" className="crow-amount">$250</text>
+        <rect x="-2" y="40" width="94" height="16" rx="2" className="crow-date-highlight" />
+        <text y="51" className="crow-date">31 OCT 2026</text>
+        <g className="crow-terms">
+          <path d="m1 64 7-3 7 4 5-3 12 2 5-4 11 4 11-2 6 3 15-3 13 2M1 72l8 2 6-3 11 4 9-3 11 2 7-4 9 4 9-2 8 3M1 80l8-3 6 4 7-2 14 2 8-3 12 2" className="crow-terms-script" />
+        </g>
+        <text y="99" className="crow-balance-label">FUNDS HELD</text>
+        <rect y="105" width="106" height="7" rx="2" className="crow-funding-track" />
+        <rect y="105" width="106" height="7" rx="2" className="crow-funding-gold" />
+        <rect y="105" width="106" height="7" rx="2" className="crow-funding-green" />
+      </g>
+      <circle cx="353" cy="284" r="3" className="crow-release-light" />
+    </g>
+
+    <g transform="translate(385 225)">
+      <g className="crow-terms-transfer">
+        <rect x="-8" y="-10" width="16" height="21" rx="2" className="paper" />
+        <path d="M-4-4h8M-4 0h6M-4 4h8" className="fine-line" />
+      </g>
+    </g>
+
+    <EscrowCoin x={181} y={260} className="crow-deposit crow-deposit-one" />
+    <EscrowCoin x={181} y={260} className="crow-deposit crow-deposit-two" />
+    <EscrowCoin x={181} y={260} className="crow-deposit crow-deposit-three" />
+    <Check x={395} y={222} className="crow-provider-check" />
+    <Check x={449} y={217} className="crow-provider-approved" />
+
+    <g>
+      <text x="280" y="27" textAnchor="middle" className="crow-role">ARBITRATOR</text>
+      <rect x="246" y="38" width="68" height="54" rx="5" className="paper" />
+      <path d="M255 53h19M255 59h12" className="paper-lines" />
+      <path d="m280 70 10-8 4 10 7-9 3 7M280 79h23" className="crow-arbitrator-approved crow-signature-script" />
+      <text x="280" y="107" textAnchor="middle" className="crow-role-note">Signs at settlement</text>
+    </g>
+
+    <g transform="translate(280 112)">
+      <g className="crow-signature-transfer">
+        <circle r="13" className="crow-signature-disc" />
+        <path d="m-7 3 6-9 2 11 5-7 2 5M-7 8h14" className="crow-signature-script" />
+      </g>
+    </g>
+
+    <EscrowCoin x={367} y={269} className="crow-release crow-release-one" />
+    <EscrowCoin x={367} y={269} className="crow-release crow-release-two" />
+    <EscrowCoin x={367} y={269} className="crow-release crow-release-three" />
+
+    <g transform="translate(280 366)">
+      <rect x="-102" y="-17" width="204" height="29" rx="5" className="crow-status-card" />
+      <g className="crow-phase-created"><text textAnchor="middle" className="crow-status-text">Terms created</text></g>
+      <g className="crow-phase-funded"><text textAnchor="middle" className="crow-status-text">Escrow funded</text></g>
+      <g className="crow-phase-accepted"><text textAnchor="middle" className="crow-status-text">Funded · terms accepted</text></g>
+      <g className="crow-phase-due"><text textAnchor="middle" className="crow-status-text">Settlement date reached</text></g>
+      <g className="crow-phase-released">
+        <rect x="-102" y="-17" width="204" height="29" rx="5" className="crow-released-card" />
+        <text textAnchor="middle" className="crow-status-text crow-released-text">Funds released</text>
+      </g>
+    </g>
   </>;
 }
 
