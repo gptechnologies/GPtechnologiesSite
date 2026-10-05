@@ -1,4 +1,9 @@
 export interface Project {
+  id: string;
+  category: string;
+  figure: string;
+  activity: string;
+  visualDescription: string;
   date: string;
   title: string;
   description: string;
@@ -12,29 +17,44 @@ export interface Project {
 // Add, remove, or reorder projects here. Dates display in Month Year format.
 export const projects: Project[] = [
   {
+    id: 'chainideas',
+    category: 'Discovery & markets',
+    figure: 'The discovery engine',
+    activity: 'Discover → screen → alert',
+    visualDescription: 'Trading pairs leave liquidity pools, pass through screening filters, and arrive as a qualifying alert.',
     date: 'October 2026',
     title: 'ChainIdeas',
     description:
       'A free scanner similar to TradeIdeas that discovers new trading pairs through liquidity pools on Solana and Robinhood Chain, then screens them using professional stock-screening criteria. Includes alerts and customizable filters to build a variety of screeners.',
   },
   {
+    id: 'crow',
+    category: 'Onchain agreements',
+    figure: 'A shared agreement',
+    activity: 'Fund → confirm → release',
+    visualDescription: 'Two wallets fund an escrow vault. Both parties confirm before funds are released.',
     date: 'July 2026',
     title: 'Crow',
     description:
-      'Decentralized P2P escrow protocol deployed on Ethereum and Arbitrum. Any parties with a wallet can set terms and arbitrators to deploy an escrow from the factory. The immutable escrow contract holds funds until the settlement date, then releases them through mutual confirmation or designated arbitrators. Everything uses signed transactions with no custody of funds or wallet approvals. Successful escrows pay a 1% fee capped at $1 USDC.',
+      'A decentralized P2P escrow protocol on Ethereum and Arbitrum. Parties set their terms and arbitrators, then an immutable contract holds funds until settlement through mutual confirmation or arbitration. Signed transactions, no custody of funds, and no wallet approvals. Successful escrows pay a 1% fee capped at $1 USDC.',
     link: 'https://sendacrow.xyz',
     resources: [
       {
-        label: 'Arbitrum factory: 0x0798065Ea3867CaEBa7bBF124E0B599f70226ABE',
+        label: 'Arbitrum contract',
         href: 'https://arbiscan.io/address/0x0798065Ea3867CaEBa7bBF124E0B599f70226ABE#code',
       },
       {
-        label: 'Ethereum factory: 0x0798065Ea3867CaEBa7bBF124E0B599f70226ABE',
+        label: 'Ethereum contract',
         href: 'https://etherscan.io/address/0x0798065Ea3867CaEBa7bBF124E0B599f70226ABE#code',
       },
     ],
   },
   {
+    id: 'cot',
+    category: 'Market research',
+    figure: 'Positions, in perspective',
+    activity: 'Weekly reports → a clearer picture',
+    visualDescription: 'Weekly data flows into a chart with two evolving position lines and a report beside it.',
     date: 'October 2026',
     title: 'Commitment of Traders Charts',
     description:
@@ -42,37 +62,67 @@ export const projects: Project[] = [
     link: 'https://cot-chartsv4.vercel.app/',
   },
   {
+    id: 'purchase-offer',
+    category: 'Property & paperwork',
+    figure: 'From address to agreement',
+    activity: 'Find → fill → export',
+    visualDescription: 'Property details travel from a house into an agreement, and the completed document receives a checkmark.',
     date: 'July 2026',
     title: 'Purchase and Offer Agreement Tool',
     description:
-      'Enter an address to automatically retrieve property information from the MLS or public data providers such as Zillow and Redfin, then populate a purchase and offer agreement template. Send a plain-English text or voice message to an AI agent to extract the remaining details and complete the fields. Save your progress, export a PDF, and update the template in one click.',
+      'Turn a property address into a purchase and offer agreement. Pull property information from the MLS or public sources, then use a plain-English text or voice message to fill the remaining details with AI. Save your progress, export a PDF, and update the template in one click.',
     link: 'https://purchaseandoffertool.vercel.app/',
   },
   {
+    id: 'audit',
+    category: 'Financial operations',
+    figure: 'A second set of eyes',
+    activity: 'Review → reconcile → verify',
+    visualDescription: 'A scanning bar reviews financial documents, flags a mismatch, and verifies the reconciled totals.',
     date: 'July 2026',
     title: 'Private Equity Audit Tool',
     description:
       'An audit tool that reviews financial statements, investor notices, and capital calls for alignment, formatting, grammar, and footing.',
   },
   {
+    id: 'voicemail',
+    category: 'Conversations & coordination',
+    figure: 'The call gets answered',
+    activity: 'Answer → understand → coordinate',
+    visualDescription: 'A ringing phone sends a voice waveform to an agent, which creates a transcript and an appointment.',
     date: 'July 2026',
     title: 'AI Voicemail Agent',
     description:
-      'If you or your business misses a call, an AI agent picks up instead of sending the caller to voicemail. The agent only answers calls that would otherwise be missed, knows your business, and can answer questions, schedule meetings or appointments, and direct callers to the right person. Call data is automatically recorded in the software systems you already use.',
+      'An AI agent answers the calls you would otherwise miss. It knows your business, answers questions, schedules appointments, and directs callers to the right person. Call details are automatically recorded in the software systems you already use.',
   },
   {
+    id: 'forecasting',
+    category: 'Planning & reporting',
+    figure: 'The road ahead',
+    activity: 'Ingest → forecast → report',
+    visualDescription: 'Contract records feed a billing timeline, and forecast bars rise into a board reporting chart.',
     date: 'January 2026',
     title: 'Private Equity Contract Forecasting Agent',
     description:
       'Automatically ingests data from Salesforce, transforms it, and populates board reporting packages. Creates lifetime billing schedules and invoices to automate billing review and forecasting.',
   },
   {
+    id: 'rfp',
+    category: 'Knowledge & proposals',
+    figure: 'Knowledge becomes an answer',
+    activity: 'Gather → synthesize → draft',
+    visualDescription: 'Knowledge sources send information into an agent, which assembles a proposal document.',
     date: 'July 2026',
     title: 'RFP Agent',
     description:
       'Automatically generates answers to RFPs using company data, knowledge bases, past work, current events, and other relevant sources.',
   },
   {
+    id: 'billing',
+    category: 'Financial operations',
+    figure: 'Everything accounted for',
+    activity: 'Collect → organize → invoice',
+    visualDescription: 'Travel and expense receipts move into a ledger and become one organized invoice.',
     date: 'January 2026',
     title: 'Portfolio Company Billing',
     description:
