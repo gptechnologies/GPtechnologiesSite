@@ -43,8 +43,8 @@ function Paper({ x, y, title, className = '', children }: {
       <path d="m4 5 86 0v116H4Z" className="paper-shadow" />
       <path d="M0 0h70l16 16v100H0Z" className="paper" />
       <path d="M70 0v16h16" className="fine-line" />
-      <text x="12" y="34" className="svg-title">{title}</text>
-      <path d="M12 48h58M12 57h42M12 72h58M12 81h50M12 90h58" className="paper-lines" />
+      <text x="12" y="34" className="svg-title" style={title.length > 10 ? { fontSize: 8 } : undefined}>{title}</text>
+      <path d="M12 48h58M12 57h42M12 72h58M12 81h50M12 90h40" className="paper-lines" />
       {children}
     </g>
   </g>;
@@ -212,14 +212,13 @@ function ChartScene() {
         <path d="m28 132 22-10 21 6 23-34 20 10 24-30 22 11 20-21 23 5 22-22 22 10 32-20" className="chart-long" />
         <path d="m28 100 22 9 21-13 23 25 20-7 24 26 22-12 20 21 23-7 22 14 22-7 32 14" className="chart-short" />
       </g>
-      <path d="M18 185h10m7 0h35" className="chart-long" /><text x="78" y="188" className="svg-label">LONG</text>
-      <path d="M151 185h10m7 0h35" className="chart-short" /><text x="213" y="188" className="svg-label">SHORT</text>
+      <path d="M18 185h30" className="chart-long" /><text x="56" y="188" className="svg-label">LONG</text>
+      <path d="M125 185h30" className="chart-short" /><text x="163" y="188" className="svg-label">SHORT</text>
       <path d="M40 48v123" className="chart-cursor" />
     </g>
     <path d="m260 301 0 20 50 15 0-19" className="monitor-stand" />
     <path d="m260 321-35 18 50 25 35-18Z" className="box-top" />
     <g transform="translate(350 241) rotate(12) scale(.7)"><Paper x={0} y={0} title="CFTC" /><path d="M12 99h55" className="accent-line" /></g>
-    <text x="106" y="351" className="svg-label">A WEEKLY PERSPECTIVE</text>
   </>;
 }
 
@@ -240,12 +239,11 @@ function PropertyScene() {
     <g transform="translate(332 143) rotate(8)">
       <Paper x={0} y={0} title="AGREEMENT">
         <path d="M12 48h58M12 57h42M12 72h58M12 81h50" className="filled-fields" />
-        <path d="m14 101 10-5 5 6 9-8 8 7 13-4" className="signature" />
+        <path d="m14 101 10-5 5 6 9-8 8 7 4-4" className="signature" />
       </Paper>
-      <Check x={77} y={109} className="document-check" />
+      <Check x={70} y={101} className="document-check" />
     </g>
     <g className="property-packet"><rect x="230" y="232" width="12" height="9" rx="2" className="packet" /></g>
-    <text x="100" y="334" className="svg-label">ONE ADDRESS. LESS PAPERWORK.</text>
   </>;
 }
 
@@ -255,25 +253,20 @@ function AuditScene() {
     <g transform="translate(120 151) rotate(-8)">
       <Paper x={0} y={0} title="STATEMENT" />
       <path d="M14 65h56M42 42v52" className="fine-line" />
-      <text x="52" y="109" className="svg-label">Σ</text>
+      <text x="12" y="109" className="svg-title" style={{ fontSize: 6.5 }}>FORMATTING</text>
     </g>
     <g transform="translate(234 114)">
       <Paper x={0} y={0} title="CAPITAL CALL" />
       <rect x="7" y="64" width="72" height="17" rx="2" className="audit-flag" />
       <path d="M7 42h72" className="scan-beam" />
-      <Check x={74} y={104} className="audit-check" />
+      <text x="12" y="109" className="svg-title" style={{ fontSize: 6.5 }}>FOOTING</text>
+      <Check x={70} y={101} className="audit-check" />
     </g>
     <g transform="translate(346 150) rotate(8)">
       <Paper x={0} y={0} title="NOTICE" />
-      <Check x={72} y={104} className="audit-check" />
+      <text x="12" y="109" className="svg-title" style={{ fontSize: 6.5 }}>ALIGNMENT</text>
+      <Check x={70} y={101} className="audit-check" />
     </g>
-    <path d="M126 301h305" className="fine-line" />
-    <circle cx="155" cy="301" r="4" className="green-light breathe" />
-    <circle cx="273" cy="301" r="4" className="warm-light breathe" style={delay(-2)} />
-    <circle cx="395" cy="301" r="4" className="green-light breathe" style={delay(-4)} />
-    <text x="122" y="325" className="svg-label">FORMATTING</text>
-    <text x="245" y="325" className="svg-label">FOOTING</text>
-    <text x="365" y="325" className="svg-label">ALIGNMENT</text>
   </>;
 }
 
@@ -304,9 +297,8 @@ function VoiceScene() {
       <path d="M0 17h118M17-5v13M101-5v13" className="fine-line" />
       <text x="12" y="38" className="svg-title">APPOINTMENT</text>
       <path d="M12 47h56" className="paper-lines" />
-      <Check x={104} y={42} className="document-check" />
+      <Check x={100} y={41} className="document-check" />
     </g>
-    <text x="115" y="330" className="svg-label">A CONVERSATION, CONTINUED.</text>
   </>;
 }
 
@@ -333,7 +325,6 @@ function ForecastScene() {
         <circle cx="22" cy="-1" r="3" className="warm-light breathe" style={delay(-i)} />
       </g>)}
     </g>
-    <text x="222" y="361" className="svg-label">THE FULL CONTRACT LIFETIME</text>
   </>;
 }
 
@@ -345,7 +336,9 @@ function KnowledgeScene() {
       <Box x={0} y={-22} width={43} depth={27} height={22} />
       <Box x={0} y={-44} width={43} depth={27} height={22} />
       <path d="m-19 1 20 10m-20-32 20 10m-20 12 20 10" className="fine-line" />
-      <text x="-29" y="-60" className="svg-label">PAST WORK</text>
+      <g transform="matrix(1 .5 0 1 -19 -16)">
+        <text className="svg-title" style={{ fontSize: 6, letterSpacing: 0 }}>PAST WORK</text>
+      </g>
     </g>
     <g transform="translate(185 270) scale(.65)">
       <Paper x={0} y={0} title="KNOWLEDGE" />
@@ -361,10 +354,9 @@ function KnowledgeScene() {
     <Token x={244} y={302} label="•" className="knowledge-two" seconds={-2} />
     <g transform="translate(351 154) rotate(5)">
       <Paper x={0} y={0} title="PROPOSAL" />
-      <path d="M12 48h58M12 57h42M12 72h58M12 81h50M12 90h58" className="filled-fields" />
-      <Check x={74} y={105} className="document-check" />
+      <path d="M12 48h58M12 57h42M12 72h58M12 81h50M12 90h40" className="filled-fields" />
+      <Check x={70} y={101} className="document-check" />
     </g>
-    <text x="281" y="324" className="svg-label">PROPOSAL READY</text>
   </>;
 }
 
@@ -375,8 +367,10 @@ function BillingScene() {
     <g transform="translate(148 239) rotate(8) scale(.65)"><Paper x={0} y={0} title="EXPENSE" /><text x="12" y="105" className="svg-title">$</text></g>
     <g transform="translate(244 146)">
       <Box x={0} y={0} width={64} depth={42} height={101} />
-      <path d="m-33 50 40 20m-40-1 40 20m-40-1 40 20m-40-1 40 20" className="ledger-lines" />
-      <text x="-29" y="57" transform="rotate(26 -29 57)" className="svg-title">LEDGER</text>
+      <g transform="matrix(1 .5 0 1 -33 42)">
+        <text y="18" className="svg-title">LEDGER</text>
+        <path d="M0 32h40M0 51h40M0 70h40" className="ledger-lines" />
+      </g>
     </g>
     <path d="M209 238 234 253M209 292 234 277M298 261 368 228" className="flow-line" />
     <g className="receipt-one"><rect x="204" y="228" width="12" height="16" rx="2" className="paper" /><path d="M207 234h6M207 239h4" className="fine-line" /></g>
@@ -385,9 +379,8 @@ function BillingScene() {
       <Paper x={0} y={0} title="INVOICE" />
       <path d="M12 79h58" className="fine-line" />
       <text x="12" y="105" className="svg-title">TOTAL</text>
-      <Check x={76} y={104} className="document-check" />
+      <Check x={70} y={101} className="document-check" />
     </g>
-    <text x="184" y="357" className="svg-label">MANY EXPENSES. ONE INVOICE.</text>
   </>;
 }
 
