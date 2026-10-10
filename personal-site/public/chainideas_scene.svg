@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 430" width="560" height="430" class="chainideas-artwork" role="img" aria-labelledby="chainideas-title chainideas-desc">
+<title id="chainideas-title">ChainIdeas discovery illustration</title>
+<desc id="chainideas-desc">Solana and Robinhood Chain feed a discovery engine, which screens pairs and displays qualified pairs.</desc>
+<style>
+/* ChainIdeas: the designer's layered SVG, with one synchronized eight-second cycle. */
+.chainideas-artwork .ci-outline { stroke: #8d8070; stroke-width: 1.35; stroke-linejoin: round; stroke-linecap: round; }
+.chainideas-artwork .ci-fine { stroke: #b8ad9d; stroke-width: 1.1; stroke-linecap: round; fill: none; }
+.chainideas-artwork .ci-gridline { stroke: #dcd4c8; stroke-width: .85; fill: none; }
+.chainideas-artwork .ci-label { font-family: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace; font-size: 10px; letter-spacing: .55px; fill: #675c50; }
+.chainideas-artwork .ci-small { font-size: 8px; letter-spacing: .3px; }
+.chainideas-artwork .ci-engine-label { font-size: 7.5px; }
+.chainideas-artwork .ci-moving { stroke-dasharray: 4 6; }
+.chainideas-artwork .ci-token { opacity: 0; }
+.chainideas-artwork #chainideas-token-solana { animation: ci-discover-solana 8s var(--ease-in-out, cubic-bezier(.65, 0, .35, 1)) infinite; }
+.chainideas-artwork #chainideas-token-robinhood { animation: ci-discover-robinhood 8s var(--ease-in-out, cubic-bezier(.65, 0, .35, 1)) infinite; }
+.chainideas-artwork .ci-scan-symbol { opacity: .55; animation: ci-process 8s ease-in-out infinite; }
+.chainideas-artwork #chainideas-token-qualified { animation: ci-qualify 8s var(--ease-in-out, cubic-bezier(.65, 0, .35, 1)) infinite; }
+.chainideas-artwork .ci-status { opacity: 0; animation: ci-status 8s ease-in-out infinite; }
+.chainideas-artwork #chainideas-dashboard-rows { opacity: .2; animation: ci-rows 8s ease-in-out infinite; }
+.chainideas-artwork .ci-bar { transform-box: fill-box; transform-origin: center bottom; opacity: 0; transform: scaleY(.1); animation: ci-bars 8s var(--ease-out, cubic-bezier(.23, 1, .32, 1)) infinite; }
+
+/* 0–2s: both chains send data into the engine. */
+@keyframes ci-discover-solana {
+  0% { opacity: 0; transform: translate(-32.5px, -9.5px); }
+  3% { opacity: 1; transform: translate(-32.5px, -9.5px); }
+  22% { opacity: 1; transform: translate(27.5px, 15.5px); }
+  25%, 100% { opacity: 0; transform: translate(34.5px, 18.5px); }
+}
+@keyframes ci-discover-robinhood {
+  0%, 5% { opacity: 0; transform: translate(-35.5px, 1.5px); }
+  8% { opacity: 1; transform: translate(-35.5px, 1.5px); }
+  22% { opacity: 1; transform: translate(24.5px, -23.5px); }
+  25%, 100% { opacity: 0; transform: translate(31.5px, -24.5px); }
+}
+/* 2–4s: processing pulses; the physical engine stays stationary. */
+@keyframes ci-process {
+  0%, 25%, 37.5%, 50%, 100% { opacity: .55; }
+  31.25%, 43.75% { opacity: 1; }
+  60%, 94% { opacity: .75; }
+}
+/* 4–6s: a qualified token arrives, followed by results and growing bars. */
+@keyframes ci-qualify {
+  0%, 50% { opacity: 0; transform: translate(-28px, 1px); }
+  53% { opacity: 1; transform: translate(-28px, 1px); }
+  61% { opacity: 1; transform: translate(12px, 3px); }
+  64%, 100% { opacity: 0; transform: translate(21px, 4px); }
+}
+@keyframes ci-status {
+  0%, 64%, 100% { opacity: 0; }
+  75%, 94% { opacity: 1; }
+}
+@keyframes ci-rows {
+  0%, 64%, 100% { opacity: .2; }
+  75%, 94% { opacity: 1; }
+}
+@keyframes ci-bars {
+  0%, 64%, 100% { opacity: 0; transform: scaleY(.1); }
+  75%, 94% { opacity: 1; transform: scaleY(1); }
+}
+/* 6–8s: hold completed results, then fade/reset before the next discovery. */
+@media (prefers-reduced-motion: reduce) {
+.chainideas-artwork * { animation: none !important; }
+.chainideas-artwork .ci-token { display: none; }
+.chainideas-artwork .ci-scan-symbol,
+.chainideas-artwork .ci-status,
+.chainideas-artwork #chainideas-dashboard-rows,
+.chainideas-artwork .ci-bar { opacity: 1; transform: none; }
+}
+</style>
+
+<!-- PLATFORM: a single contained isometric platform -->
+<g id="chainideas-platform">
+ <path d="M30 228 L274 110 L531 234 L287 354 Z" fill="#F4F2ED" class="ci-outline"/>
+ <path d="M30 228 L287 354 L287 365 L30 239 Z" fill="#E0D6C5" class="ci-outline"/>
+ <path d="M287 354 L531 234 L531 245 L287 365 Z" fill="#D0C3AE" class="ci-outline"/>
+ <path d="M91 258 L336 140 M155 290 L399 171 M221 322 L466 203 M91 199 L348 323 M152 170 L408 293 M215 140 L470 264" class="ci-gridline"/>
+</g>
+<!-- SOURCE 1: SOLANA -->
+<g id="chainideas-source-solana">
+ <path d="M73 200 V165 A38 15 0 0 1 149 165 V200 A38 15 0 0 1 73 200" fill="#E0D6C5" class="ci-outline"/>
+ <ellipse cx="111" cy="165" rx="38" ry="15" fill="#DDE5D6" class="ci-outline"/>
+ <path d="M95 158 H125 L119 163 H89 Z M95 166 H125 L119 171 H89 Z" fill="#809370"/>
+ <text x="111" y="192" text-anchor="middle" class="ci-label ci-small">SOLANA</text>
+</g>
+<!-- SOURCE 2: ROBINHOOD -->
+<g id="chainideas-source-robinhood">
+ <path d="M73 268 V233 A38 15 0 0 1 149 233 V268 A38 15 0 0 1 73 268" fill="#E0D6C5" class="ci-outline"/>
+ <ellipse cx="111" cy="233" rx="38" ry="15" fill="#DDE5D6" class="ci-outline"/>
+ <path d="M105 224 L119 220 L127 225 L119 230 L113 237 L109 235 L115 227 L104 231 Z" fill="#809370"/>
+ <text x="111" y="257" text-anchor="middle" class="ci-label ci-small">ROBINHOOD</text>
+ <text x="111" y="266" text-anchor="middle" class="ci-label ci-small">CHAIN</text>
+</g>
+<!-- INPUT ROUTES -->
+<g id="chainideas-data-paths">
+ <path id="chainideas-route-solana" d="M149 165 C176 164 184 180 216 193" stroke="#809370" stroke-width="1.6" fill="none" class="ci-moving"/>
+ <path id="chainideas-route-robinhood" d="M149 237 C182 238 185 214 216 211" stroke="#BC7950" stroke-width="1.6" fill="none" class="ci-moving"/>
+ <path d="M209 190 L218 194 L212 197" fill="none" stroke="#809370" stroke-width="1.4"/>
+ <path d="M209 207 L218 211 L211 215" fill="none" stroke="#BC7950" stroke-width="1.4"/>
+</g>
+<g id="chainideas-token-solana" class="ci-token"><rect x="173" y="164" width="17" height="21" rx="3" fill="#FFFDF7" class="ci-outline"/><path d="M178 172 h7 M178 176 h6" class="ci-fine"/></g>
+<g id="chainideas-token-robinhood" class="ci-token"><rect x="176" y="225" width="17" height="21" rx="3" fill="#FFFDF7" class="ci-outline"/><path d="M181 233 h7 M181 237 h6" class="ci-fine"/></g>
+<!-- ENGINE -->
+<g id="chainideas-discovery-engine">
+ <path d="M219 193 L274 167 L343 199 L287 226 Z" fill="#F0E8DC" class="ci-outline"/>
+ <path d="M219 193 L287 226 V285 L219 251 Z" fill="#ECE5D8" class="ci-outline"/>
+ <path d="M287 226 L343 199 V259 L287 285 Z" fill="#D0C3AE" class="ci-outline"/>
+ <circle cx="229" cy="215" r="3" fill="#809370"/><circle cx="229" cy="229" r="3" fill="#BC7950"/>
+ <g transform="matrix(1 .5 0 1 241 212)"><text class="ci-label ci-small ci-engine-label">DISCOVERY</text><text y="12" class="ci-label ci-small ci-engine-label">ENGINE</text></g>
+ <path d="M299 237 l32 -15 M299 245 l25 -12 M299 253 l29 -14" class="ci-fine"/>
+ <g id="chainideas-scan-indicator">
+   <path d="M256 182 L256 150 Q256 146 260 146 H290 Q294 146 294 150 V184" fill="#FFFDF7" class="ci-outline"/>
+   <g class="ci-scan-symbol"><circle cx="275" cy="165" r="8" fill="none" stroke="#809370" stroke-width="2"/><path d="M281 171 l7 7" stroke="#809370" stroke-width="2" stroke-linecap="round"/></g>
+ </g>
+</g>
+<!-- OUTPUT DATA ROUTE -->
+<g id="chainideas-output-route"><path d="M344 230 C364 228 370 229 393 233" stroke="#BC7950" stroke-width="1.7" fill="none" class="ci-moving"/><path d="M387 229 l8 4 -8 4" fill="none" stroke="#BC7950" stroke-width="1.4"/></g>
+<g id="chainideas-token-qualified" class="ci-token"><circle cx="372" cy="229" r="10" fill="#FFFDF7" class="ci-outline"/><circle cx="372" cy="229" r="4" fill="#BC7950"/></g>
+<!-- QUALIFIED DASHBOARD: foot rests within platform boundary -->
+<g id="chainideas-qualified-pairs">
+ <path d="M392 175 L500 191 L500 275 L392 259 Z" fill="#D0C3AE" transform="translate(5 -4)" class="ci-outline"/>
+ <path d="M392 175 L500 191 V275 L392 259 Z" fill="#FFFDF7" class="ci-outline"/>
+ <path d="M392 175 L500 191 V211 L392 195 Z" fill="#ECE5D8"/>
+ <text x="399" y="189" class="ci-label ci-small" transform="rotate(8 399 189)">QUALIFIED PAIRS</text>
+ <g id="chainideas-status-indicators" class="ci-status" fill="#809370"><circle cx="402" cy="207" r="3.2"/><circle cx="402" cy="225" r="3.2"/><circle cx="402" cy="243" r="3.2"/></g>
+ <g id="chainideas-dashboard-rows" class="ci-fine"><path d="M410 208 l30 4 M410 214 l22 3 M410 226 l30 4 M410 232 l20 3 M410 244 l30 4 M410 250 l23 3"/></g>
+ <g id="chainideas-chart-bars" fill="#809370">
+  <rect class="ci-bar" x="451" y="212" width="3.5" height="8"/><rect class="ci-bar" x="457" y="208" width="3.5" height="13" fill="#BC7950"/><rect class="ci-bar" x="463" y="214" width="3.5" height="8"/><rect class="ci-bar" x="469" y="210" width="3.5" height="13"/>
+  <rect class="ci-bar" x="451" y="231" width="3.5" height="8"/><rect class="ci-bar" x="457" y="228" width="3.5" height="11"/><rect class="ci-bar" x="463" y="232" width="3.5" height="8" fill="#BC7950"/><rect class="ci-bar" x="469" y="225" width="3.5" height="14"/>
+  <rect class="ci-bar" x="451" y="249" width="3.5" height="8"/><rect class="ci-bar" x="457" y="247" width="3.5" height="10"/><rect class="ci-bar" x="463" y="250" width="3.5" height="8"/><rect class="ci-bar" x="469" y="245" width="3.5" height="13" fill="#BC7950"/>
+ </g>
+ <path d="M443 265 L443 279 L457 282 L457 268" fill="#E0D6C5" class="ci-outline"/>
+ <path d="M431 280 L456 285 L471 279 L448 275 Z" fill="#D0C3AE" class="ci-outline"/>
+</g>
+</svg>

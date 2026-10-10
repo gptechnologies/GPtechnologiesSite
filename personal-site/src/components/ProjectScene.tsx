@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import type { Project } from '../data/projects';
+import { ChainIdeasScene } from './ChainIdeasScene';
 
 const delay = (seconds: number): CSSProperties => ({ animationDelay: seconds + 's' });
 
@@ -56,48 +57,6 @@ function Token({ x, y, label, className = '', seconds = 0 }: {
   return <g transform={'translate(' + x + ' ' + y + ')'}><g className={className} style={delay(seconds)}>
     <circle r="14" className="token" /><text y="3" textAnchor="middle" className="token-label">{label}</text>
   </g></g>;
-}
-
-function ScannerScene() {
-  return <>
-    <Platform />
-    <g className="pool">
-      <path d="M150 227v28c0 12 64 12 64 0v-28" className="pool-wall" />
-      <ellipse cx="182" cy="227" rx="32" ry="12" className="pool-water" />
-      <ellipse cx="182" cy="227" rx="22" ry="7" className="pool-ring breathe" />
-      <path d="M125 268v28c0 12 64 12 64 0v-28" className="pool-wall" />
-      <ellipse cx="157" cy="268" rx="32" ry="12" className="pool-water" />
-      <ellipse cx="157" cy="268" rx="22" ry="7" className="pool-ring breathe" style={delay(-2)} />
-      <text x="158" y="208" className="svg-label">SOLANA</text>
-      <text x="106" y="325" className="svg-label">ROBINHOOD</text>
-    </g>
-    <path d="M214 227 262 196 326 227 376 219M186 269 262 231 326 227" className="flow-line" />
-    <g transform="translate(244 118)">
-      <path d="m0 0 38 19v111L0 111Z" className="filter-back" />
-      <path d="m0 0 8-4 38 19-8 4m0 0 8-4v111l-8 4" className="box-side" />
-      <path d="m11 33 16 8m-16 11 16 8m-16 11 16 8" className="filter-slots" />
-      <circle cx="19" cy="94" r="3" className="warm-light breathe" />
-    </g>
-    <g transform="translate(311 152)">
-      <path d="m0 0 30 15v91L0 91Z" className="filter-back" />
-      <path d="m0 0 7-4 30 15-7 4m0 0 7-4v91l-7 4" className="box-side" />
-      <path d="m8 27 14 7m-14 10 14 7" className="filter-slots" />
-      <circle cx="15" cy="75" r="3" className="green-light breathe" style={delay(-2)} />
-    </g>
-    <Token x={214} y={227} label="A" className="pair-one" />
-    <Token x={186} y={269} label="B" className="pair-two" seconds={-3} />
-    <path d="M422 232v43m-16 6 16-8 16 8-16 8Z" className="monitor-stand" />
-    <g transform="translate(376 168)">
-      <g className="alert-card">
-        <rect width="98" height="64" rx="5" className="paper" />
-        <circle cx="15" cy="17" r="3" className="green-light" />
-        <text x="25" y="20" className="svg-title">MATCH FOUND</text>
-        <path d="M13 34h70M13 43h44" className="paper-lines" />
-        <path d="m69 52 5-5 5 2 7-9" className="accent-line" />
-      </g>
-    </g>
-    <text x="234" y="312" className="svg-label">SCREENING CRITERIA</text>
-  </>;
 }
 
 function EscrowCoin({ x, y, className }: { x: number; y: number; className: string }) {
@@ -385,7 +344,7 @@ function BillingScene() {
 }
 
 const scenes: Record<string, () => ReactNode> = {
-  chainideas: ScannerScene,
+  chainideas: ChainIdeasScene,
   crow: EscrowScene,
   cot: ChartScene,
   'purchase-offer': PropertyScene,
