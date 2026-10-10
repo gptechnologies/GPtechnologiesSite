@@ -391,67 +391,70 @@ a svg { flex-shrink: 0; stroke: currentColor; stroke-width: 1.4; stroke-linecap:
   .scene-crow .crow-funding-gold, .scene-crow .crow-funding-green { transform: scaleX(0); }
 }
 
-/* ChainIdeas: the designer's layered SVG, with one synchronized eight-second cycle. */
-.chainideas-artwork .ci-outline { stroke: #8d8070; stroke-width: 1.35; stroke-linejoin: round; stroke-linecap: round; }
-.chainideas-artwork .ci-fine { stroke: #b8ad9d; stroke-width: 1.1; stroke-linecap: round; fill: none; }
-.chainideas-artwork .ci-gridline { stroke: #dcd4c8; stroke-width: .85; fill: none; }
-.chainideas-artwork .ci-label { font-family: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace; font-size: 10px; letter-spacing: .55px; fill: #675c50; }
-.chainideas-artwork .ci-small { font-size: 8px; letter-spacing: .3px; }
-.chainideas-artwork .ci-engine-label { font-size: 7.5px; }
-.chainideas-artwork .ci-moving { stroke-dasharray: 4 6; }
-.chainideas-artwork .ci-token { opacity: 0; }
-.chainideas-artwork #chainideas-token-solana { animation: ci-discover-solana 8s var(--ease-in-out, cubic-bezier(.65, 0, .35, 1)) infinite; }
-.chainideas-artwork #chainideas-token-robinhood { animation: ci-discover-robinhood 8s var(--ease-in-out, cubic-bezier(.65, 0, .35, 1)) infinite; }
-.chainideas-artwork .ci-scan-symbol { opacity: .55; animation: ci-process 8s ease-in-out infinite; }
-.chainideas-artwork #chainideas-token-qualified { animation: ci-qualify 8s var(--ease-in-out, cubic-bezier(.65, 0, .35, 1)) infinite; }
-.chainideas-artwork .ci-status { opacity: 0; animation: ci-status 8s ease-in-out infinite; }
-.chainideas-artwork #chainideas-dashboard-rows { opacity: .2; animation: ci-rows 8s ease-in-out infinite; }
-.chainideas-artwork .ci-bar { transform-box: fill-box; transform-origin: center bottom; opacity: 0; transform: scaleY(.1); animation: ci-bars 8s var(--ease-out, cubic-bezier(.23, 1, .32, 1)) infinite; }
+/* ChainIdeas: final isometric artwork; input → three checks → qualified output. */
+.chainideas-artwork .ci-outline { stroke: #9c9080; stroke-width: 1.35; stroke-linejoin: round; stroke-linecap: round; }
+.chainideas-artwork .ci-fine { stroke: #c6bcae; stroke-width: 1.1; stroke-linejoin: round; stroke-linecap: round; }
+.chainideas-artwork .ci-mono { font-family: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace; fill: #817669; letter-spacing: 1.05px; }
+.chainideas-artwork .ci-criteria-label { font-family: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; letter-spacing: .1px; fill: #756b5e; }
+.chainideas-artwork .ci-criterion-empty { fill: #f7f5ef; stroke: #a79a89; stroke-width: 1.5; }
+.chainideas-artwork .ci-criterion-fill { fill: #809370; stroke: #718564; stroke-width: 1.5; }
+.chainideas-artwork .ci-token, .chainideas-artwork .ci-criterion-fill { opacity: 0; }
+.chainideas-artwork #chainideas-solana-token { animation: ci-input-solana 8s linear infinite; }
+.chainideas-artwork #chainideas-robinhood-token { animation: ci-input-robinhood 8s linear infinite; }
+.chainideas-artwork .ci-criterion-age { animation: ci-check-age 8s ease-in-out infinite; }
+.chainideas-artwork .ci-criterion-volume { animation: ci-check-volume 8s ease-in-out infinite; }
+.chainideas-artwork .ci-criterion-liquidity { animation: ci-check-liquidity 8s ease-in-out infinite; }
+.chainideas-artwork #chainideas-output-token { animation: ci-send-qualified 8s var(--ease-in-out, cubic-bezier(.65, 0, .35, 1)) infinite; }
+.chainideas-artwork .ci-result-row { opacity: .15; animation: ci-results 8s ease-in-out infinite; }
+.chainideas-artwork .ci-bar { transform-box: fill-box; transform-origin: center bottom; transform: scaleY(.1); animation: ci-result-bars 8s var(--ease-out, cubic-bezier(.23, 1, .32, 1)) infinite; }
 
-/* 0–2s: both chains send data into the engine. */
-@keyframes ci-discover-solana {
-  0% { opacity: 0; transform: translate(-32.5px, -9.5px); }
-  3% { opacity: 1; transform: translate(-32.5px, -9.5px); }
-  22% { opacity: 1; transform: translate(27.5px, 15.5px); }
-  25%, 100% { opacity: 0; transform: translate(34.5px, 18.5px); }
+/* 0–2s: both source tokens follow their guide lines into Discovery. */
+@keyframes ci-input-solana {
+  0% { opacity: 0; transform: translate(-42px, -24.5px); }
+  3% { opacity: 1; transform: translate(-42px, -24.5px); }
+  13% { opacity: 1; transform: translate(-3.4px, -10.6px); }
+  22% { opacity: 1; transform: translate(29px, 5.5px); }
+  25%, 100% { opacity: 0; transform: translate(37px, 6.5px); }
 }
-@keyframes ci-discover-robinhood {
-  0%, 5% { opacity: 0; transform: translate(-35.5px, 1.5px); }
-  8% { opacity: 1; transform: translate(-35.5px, 1.5px); }
-  22% { opacity: 1; transform: translate(24.5px, -23.5px); }
-  25%, 100% { opacity: 0; transform: translate(31.5px, -24.5px); }
+@keyframes ci-input-robinhood {
+  0%, 4% { opacity: 0; transform: translate(-42px, 16.5px); }
+  7% { opacity: 1; transform: translate(-42px, 16.5px); }
+  15% { opacity: 1; transform: translate(-3px, -4px); }
+  22% { opacity: 1; transform: translate(29px, -23px); }
+  25%, 100% { opacity: 0; transform: translate(37px, -25.5px); }
 }
-/* 2–4s: processing pulses; the physical engine stays stationary. */
-@keyframes ci-process {
-  0%, 25%, 37.5%, 50%, 100% { opacity: .55; }
-  31.25%, 43.75% { opacity: 1; }
-  60%, 94% { opacity: .75; }
+/* 2–4s: qualify Age, Volume, and Liquidity in order. */
+@keyframes ci-check-age {
+  0%, 25%, 100% { opacity: 0; }
+  31.25%, 94% { opacity: 1; }
 }
-/* 4–6s: a qualified token arrives, followed by results and growing bars. */
-@keyframes ci-qualify {
-  0%, 50% { opacity: 0; transform: translate(-28px, 1px); }
-  53% { opacity: 1; transform: translate(-28px, 1px); }
-  61% { opacity: 1; transform: translate(12px, 3px); }
-  64%, 100% { opacity: 0; transform: translate(21px, 4px); }
+@keyframes ci-check-volume {
+  0%, 34.375%, 100% { opacity: 0; }
+  40.625%, 94% { opacity: 1; }
 }
-@keyframes ci-status {
-  0%, 64%, 100% { opacity: 0; }
+@keyframes ci-check-liquidity {
+  0%, 43.75%, 100% { opacity: 0; }
+  50%, 94% { opacity: 1; }
+}
+/* 4–6s: send only after all three checks pass, then populate the monitor. */
+@keyframes ci-send-qualified {
+  0%, 52% { opacity: 0; transform: translate(-29px, 0); }
+  54% { opacity: 1; transform: translate(-29px, 0); }
+  64% { opacity: 1; transform: translate(23px, 0); }
+  66%, 100% { opacity: 0; transform: translate(30px, 0); }
+}
+@keyframes ci-results {
+  0%, 66%, 100% { opacity: .15; }
   75%, 94% { opacity: 1; }
 }
-@keyframes ci-rows {
-  0%, 64%, 100% { opacity: .2; }
-  75%, 94% { opacity: 1; }
+@keyframes ci-result-bars {
+  0%, 66%, 100% { transform: scaleY(.1); }
+  75%, 94% { transform: scaleY(1); }
 }
-@keyframes ci-bars {
-  0%, 64%, 100% { opacity: 0; transform: scaleY(.1); }
-  75%, 94% { opacity: 1; transform: scaleY(1); }
-}
-/* 6–8s: hold completed results, then fade/reset before the next discovery. */
+/* 6–8s: hold the completed result and smoothly reset. */
 @media (prefers-reduced-motion: reduce) {
-.chainideas-artwork * { animation: none !important; }
+  .chainideas-artwork * { animation: none !important; }
 .chainideas-artwork .ci-token { display: none; }
-.chainideas-artwork .ci-scan-symbol,
-.chainideas-artwork .ci-status,
-.chainideas-artwork #chainideas-dashboard-rows,
-.chainideas-artwork .ci-bar { opacity: 1; transform: none; }
+.chainideas-artwork .ci-criterion-fill, .chainideas-artwork .ci-result-row { opacity: 1; }
+.chainideas-artwork .ci-bar { transform: none; }
 }

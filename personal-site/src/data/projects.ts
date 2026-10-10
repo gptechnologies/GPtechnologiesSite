@@ -21,7 +21,7 @@ export const projects: Project[] = [
     category: 'Discovery & markets',
     figure: 'The discovery engine',
     activity: 'Discover → screen → alert',
-    visualDescription: 'Solana and Robinhood Chain send data into a discovery engine, which processes pairs and displays qualified results on a dashboard.',
+    visualDescription: 'Solana and Robinhood Chain send data into Discovery. Age, Volume, and Liquidity indicators turn green before a qualified token travels to the results dashboard.',
     date: 'October 2026',
     title: 'ChainIdeas',
     description:
